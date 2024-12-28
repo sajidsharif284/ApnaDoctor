@@ -1,0 +1,84 @@
+﻿@model ApnaDoctor.Models.PatientBookings
+
+@{
+    ViewBag.Title = "PatientBookSlot";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4 class="mt-4">PatientBookings</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.PatientProfileId, "PatientProfileId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PatientProfileId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PatientProfileId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                @*<input type="button" id="SubmitScheduleBtn" class="btn btn-primary" value="Monday" name="Monday"/>*@
+                <input type="button" value="Monday" onclick="location.href='@Url.Action("Detail", "Patient")'" name="Monday"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DoctorProfileId, "DoctorProfileId", htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+            <div class="col-md-10">
+                @Html.DropDownList("DoctorProfileId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DoctorProfileId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DoctorSlotScheduleId, "DoctorSlotScheduleId", htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+            <div class="col-md-10">
+                @Html.DropDownList("DoctorSlotScheduleId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DoctorSlotScheduleId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //set onclick events for buttons
+
+        $('#SubmitScheduleBtn').click(function () { 
+            $.ajax({
+                url: '/Patient/PatientBookSlot',
+                type: "Get",
+                
+                contentType: "application/json",
+                dataType: "json",
+                success: function (response) {
+                    // Process response from controller
+                    if (response === true) {
+                        ShowMsn("Schedule have been saved successfully."); // show success notification
+                        ClearForm(); //clear form fields
+                        $('#table-body').empty(); // clear table items
+                        CheckSubmitBtn(); // disable submit button
+                    } else {
+                        ShowMsn("Ooops, an error has ocurrer.");
+                    }
+                }
+            });
+        });
+    });
+       
+</script>

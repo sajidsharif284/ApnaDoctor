@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "JSBankOTP";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+}
+
+@using (Html.BeginForm("JSBankPaymentApi", "Patient", FormMethod.Post))
+            {
+    <div class="modal-body text-center">
+        <div class="row mt-4">
+            <div class="col-md-5">
+                <label class="col-md-4">Enter OTP</label>
+                <div>
+                    <input type="text" class="col-md-8 form-control" name="OTP" />
+                </div>
+            </div>
+        </div><br />
+
+
+    </div>
+
+   
+    @Html.Hidden("orderid", (string)ViewBag.orderId)
+    @Html.Hidden("amount", (string)ViewBag.amount)
+    @Html.Hidden("token", (string)ViewBag.Token)
+    <button type="submit" class="btn btn-primary offset-md-2">Submit</button>
+
+
+}
+

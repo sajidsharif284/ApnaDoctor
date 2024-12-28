@@ -1,0 +1,210 @@
+﻿
+@{
+    Layout = null;
+}
+<style>
+    input:focus{
+    background: #2ccae6;
+}
+    .smsCode {
+        text-align: center;
+        line-height: 80px;
+        font-size: 50px;
+        border: solid 1px #ccc;
+        box-shadow: 0 0 5px #ccc inset;
+        width: 40px;
+        height:40px;
+        outline: none;
+        border-radius: 3px;
+    }
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-danger:hover,
+    .btn-danger:active{
+    background-color: #42A5F5 !important;
+    border-color: #42A5F5 !important;
+    background-image: none !important;
+    border: 0 !important;
+}
+</style>
+@Html.Hidden("role",(string)ViewBag.Role);
+@Html.Hidden("number", (string)ViewBag.Number);
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    @*<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">*@
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/login.css" />
+    @*<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>*@
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-functions.js"></script>
+    <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
+</head>
+<body>
+    <main>
+        <div class="card" style="height:440px">
+            <div class="col-md-12" >
+                <div>
+                    <img src="~/Content/img/Logo 2.jpg" style="width:120px;height:100px;display:block;margin:30px auto 0px auto" />
+                </div><br /><br />
+
+                <h6>Please enter the 6-digit verification code we sent via SMS:</h6><br /><br />
+                <div>
+                    <div id="SMSArea" class="row SMSArea  otp-list" style="margin-left:80px">
+                            <input type="text" maxlength="1" size="1" id="1" onkeyup="moveCursor(this,'2')" required  class="smsCode text-center rounded-lg " />
+                            <input type="text" maxlength="1" size="1" id="2" onkeyup="moveCursor(this,'3')" required class="smsCode text-center rounded-lg ml-1 " />
+                            <input type="text" maxlength="1" size="1" id="3" onkeyup="moveCursor(this,'4')" required class="smsCode text-center rounded-lg ml-1 " />
+                            <input type="text" maxlength="1" size="1" id="4" onkeyup="moveCursor(this,'5')" required  class="smsCode text-center rounded-lg ml-1 " />
+                            <input type="text" maxlength="1" size="1" id="5" onkeyup="moveCursor(this,'6')"  required class="smsCode text-center rounded-lg ml-1 " />
+                            <input type="text" maxlength="1" size="1" id="6"  class="smsCode text-center rounded-lg ml-1" />
+                        <div id="recaptcha-container"></div>
+
+                    </div><br /><br />
+                    <div class="row">
+                        <div class="m-auto">
+                            <input type="submit" class="btn btn-primary  otpverify" value="Verify" style="width:78px;background-color:#334b67" />
+                            <input type="submit" class="btn btn-danger " value="Resend" onclick="sendmessage();" />
+                        </div>
+                    </div>
+                   
+                </div>
+
+
+
+            </div>
+        </div>
+    </main>
+       
+</body>
+</html>
+
+<script>
+    $(".otp-list input").keyup(function () {
+        var key = event.keyCode || event.charCode;
+        if (key == 8 || key == 46) {
+            $(this).prev("input[type='text']").focus();
+        }
+    })
+    function moveCursor(fromTextBox, toTextBox) {
+        debugger;
+        var length = fromTextBox.value.length;
+        var maxLength = fromTextBox.getAttribute("maxLength");
+        if(length==maxLength)
+        {
+            document.getElementById(toTextBox).focus();
+        }
+    }
+   
+    function sendmessage() {
+        debugger;
+        var firebaseConfigs = {
+
+            authDomain: "apnadoctor-4be27.firebaseapp.com",
+            databaseURL: "https://apnadoctor-4be27-default-rtdb.firebaseio.com",
+            projectId: "apnadoctor-4be27",
+            storageBucket: "apnadoctor-4be27.appspot.com",
+            messagingSenderId: "724843782490",
+            appId: "1:724843782490:web:d38aa433f4006638015363",
+            apiKey: "AIzaSyAkAfr7ESRjvbsvzBDj-4uzbd3LcXPPJf8",
+            measurementId: "G-4PHBNW84W9"
+        };
+        firebase.initializeApp(firebaseConfigs).firestore();
+        firebase.app().firestore();
+
+        captchaInit = () => {
+            if (this.applicationVerifier && this.recaptchaWrapperRef) {
+                this.applicationVerifier.clear()
+                this.recaptchaWrapperRef.innerHTML = `<div id="recaptcha-container"></div>`
+            }
+
+
+        }
+
+        var ab = '<div id="recaptcha-container"></div>';
+
+        var number = '@ViewBag.Number';
+        // var recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+        var applicationVerifier = new firebase.auth.RecaptchaVerifier(
+              "recaptcha-container",
+              {
+                  size: "invisible"
+              }
+            );
+        firebase.auth().signInWithPhoneNumber(number, applicationVerifier)
+        .then(function (confirmationResult) {
+            window.number = number;
+            // SMS sent. On you mobile SMS will automatically sent via Firebase
+            // save with confirmationResult.confirm(code).
+            window.confirmationResult = confirmationResult;
+        }).catch(function (error) {
+            var errorMessage = error.message;
+            alert(errorMessage);
+        });
+    }
+
+    window.onload = sendmessage;
+</script>
+<script>
+    
+    $(document).ready(function () {
+
+        $(document).on('click', ".otpverify", function () {
+            debugger;
+            var role = $('#role').val();
+            //var number = $('#number').val();
+            var txtbox1 = $('#1').val();
+            var txtbox2 = $('#2').val();
+            var txtbox3 = $('#3').val();
+            var txtbox4 = $('#4').val();
+            var txtbox5 = $('#5').val();
+            var txtbox6 = $('#6').val();
+           
+            var code = txtbox1 + txtbox2 + txtbox3 + txtbox4 + txtbox5 + txtbox6;
+            var number = '@ViewBag.Number';
+                          //var number = document.getElementById('number').value;
+           var credential = firebase.auth.PhoneAuthProvider.credential(confirmationResult.verificationId, code);
+           firebase.auth().createUserWithEmailAndPassword(number+"@@apnadoctor.com.pk", number).then((userCredential) => {
+                
+                var user = userCredential.user;
+               
+
+               firebase.auth().currentUser.linkWithCredential(credential).then((user) =>{
+                   window.location.href = 'UserPassword?role=' + role + '&number=' + number;
+                })
+            .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage);
+                // ..
+                });
+               
+                // ...
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage);
+                // ..
+            });
+                          //firebase.auth().signInWithCredential(credential);
+         
+           
+
+
+              
+           
+            });
+    });
+
+
+</script>

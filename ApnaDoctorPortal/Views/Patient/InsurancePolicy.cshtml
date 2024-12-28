@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "InsurancePolicy";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>
+}
+
+<div class="row ml-3">
+    <h4 class="mt-4">Insurance Company</h4>
+    <a href="@Url.Action("GetInsurancePolicyData","Patient")"><img class="mt-4 ml-3" src="~/Content/img/plus.png" style="width:30px;height:30px" /></a>
+</div>
+<table class="table table-bordered table-striped table-hover styled-table ml-3 " style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                CompanyName
+            </th>
+            <th>
+                PolicyNumber
+            </th>
+            <th>
+                CNIC
+            </th>
+            <th>
+                LogoURL
+            </th>
+
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in ViewBag.PanelDeatil)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @item.CompanyName
+                </td>
+                <td>
+                    @item.PolicyNumber
+                </td>
+                <td>
+                    @item.CNIC
+                </td>
+                <td>
+                    @item.LogoUrl
+                </td>
+                <td>
+                    @item.status
+                </td>
+
+                @*<td>
+                    @Html.ActionLink("Edit", "EditPatientDisease", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeletePatientDisease", new { id = item.Id })
+                </td>*@
+            </tr>
+        </tbody>
+    }
+
+</table>
+

@@ -1,0 +1,96 @@
+﻿@model ApnaDoctorPortal.Models.ClientTable
+
+@{
+    ViewBag.Title = "DetailClients";
+    Layout = "~/Views/Shared/LayoutSuperAdmin.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>
+}
+<div style="margin-left:15px" class="mt-4">
+    <h3>Client Details</h3>
+    <hr style="width: 1px; color: #cc0000; width: 100%; border: 1px solid #cc0000;">
+    <div style="padding: 10px;">
+        <div class="row" style="background-color: #57789c; color: #fff; padding: 10px; font-weight: bold;">Company Information</div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">CompanyName</div>
+            <div class="col-xs-8 col-md-4">@Model.CompanyName</div>
+        </div>
+
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">Subdomain</div>
+            <div class="col-xs-8 col-md-4">@Model.Subdomain</div>
+        </div>
+
+        <div class="row" style="padding: 5px;"> &nbsp; </div>
+        <div class="row" style="background-color: #57789c; color: #fff; padding: 10px; font-weight: bold;">Client Information</div>
+        
+
+
+       
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">PaymentStatus</div>
+            <div class="col-xs-8 col-md-4">@Model.PaymentStatus</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">PaymentCycle</div>
+            <div class="col-xs-8 col-md-4">@Model.PaymentCycle</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">Status</div>
+            <div class="col-xs-8 col-md-4">@Model.Status</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">POCName</div>
+            <div class="col-xs-8 col-md-4">@Model.POCName</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">POCEmail</div>
+            <div class="col-xs-8 col-md-4">@Model.POCEmail</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">POCPhoneNumber</div>
+            <div class="col-xs-8 col-md-4">@Model.POCPhoneNumber</div>
+        </div>
+
+       
+       
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">AmountPay</div>
+            <div class="col-xs-8 col-md-4">@Model.AmountPay</div>
+        </div>
+        <div class="row" style="padding: 5px;"> &nbsp; </div>
+        <div class="row" style="background-color: #57789c; color: #fff; padding: 10px; font-weight: bold;">IT Credentials</div>
+
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">PackageNameIOS</div>
+            <div class="col-xs-8 col-md-4">@Model.PackageNameIOS</div>
+        </div>
+
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">PackageNameAndroid</div>
+            <div class="col-xs-8 col-md-4">@Model.PackageNameAndroid</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">AndroidServerKey</div>
+            <div class="col-xs-8 col-md-4 text-justify" style="word-wrap:break-word">@Model.AndroidServerKey</div>
+        </div>
+
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">BasePath</div>
+            <div class="col-xs-8 col-md-4">@Model.BasePath</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">Gmail</div>
+            <div class="col-xs-8 col-md-4">@Model.Gmail</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid #ccc; padding: 5px 0;">
+            <div class="col-xs-4 col-md-2" style="font-weight: bold;">GmailPassword</div>
+            <div class="col-xs-8 col-md-4">@Model.GmailPassword</div>
+        </div>
+        <div class="row" style="padding:10px">
+            @Html.ActionLink("Edit", "EditClient", "SuperAdmin", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ApnaDoctor.Models.DoctorQualification>
+
+@{
+    ViewBag.Title = "ListDoctorQualification";
+    Layout = "~/Views/Shared/LayoutDoctor.cshtml";
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>
+}
+<div class="row ml-2">
+    <h4 class="mt-4">Doctor Qualification</h4>
+    <a href="@Url.Action("CreateDoctorQualification","Doctor")" class="btn d-block mt-4 ml-3" style="background-color:#57789c;color:white">Add Qualification</a>
+</div>
+<table class="table table-bordered table-striped table-hover styled-table ml-3" style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorProfile.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DegreeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Institution)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorProfile.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DegreeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Institution)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditDoctorQualification", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteDoctorQualification", new { id = item.Id })
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>

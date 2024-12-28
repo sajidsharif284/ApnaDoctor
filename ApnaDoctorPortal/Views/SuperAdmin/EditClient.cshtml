@@ -1,0 +1,158 @@
+﻿@model ApnaDoctorPortal.Models.ClientTable
+
+@{
+    ViewBag.Title = "EditClient";
+    Layout = "~/Views/Shared/LayoutSuperAdmin.cshtml";
+}
+<h4 class="mt-4 ml-4">Edit ClientProfile</h4>
+<div class="ml-4">
+    @using (Html.BeginForm("EditClient", "SuperAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.Hidden("Id",(string)ViewBag.clientid)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subdomain, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Subdomain, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Subdomain, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PaymentStatus, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PaymentStatus, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PaymentStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PaymentCycle, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PaymentCycle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PaymentCycle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.POCName, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.POCName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.POCName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.POCEmail, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.POCEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.POCEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.POCPhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.POCPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.POCPhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Gmail, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Gmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Gmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GmailPassword, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GmailPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GmailPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AndroidServerKey, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AndroidServerKey, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AndroidServerKey, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.BasePath, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BasePath, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BasePath, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PackageNameIOS, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PackageNameIOS, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PackageNameIOS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PackageNameAndroid, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PackageNameAndroid, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PackageNameAndroid, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AmountPay, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AmountPay, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AmountPay, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" >VoipCertificateDoctor</label><br /><br />
+              <div class="col-md-10">
+                    <input type="file" class="form-control" name="file" accept="image/*" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">VoipCertificatePatient</label><br /><br />
+                <div class="col-md-10">
+                    <input type="file" class="form-control" name="file2" accept="image/*" />
+                </div>
+            </div>
+
+           
+           
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    </div>

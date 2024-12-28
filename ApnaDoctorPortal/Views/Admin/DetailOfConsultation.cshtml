@@ -1,0 +1,135 @@
+﻿@model ApnaDoctor.Models.Consultation
+
+@{
+    ViewBag.Title = "DetailOfConsultation";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css" />
+}
+
+
+
+<div class="row pt-5 pb-3">
+    <div class="col-md-5 ">
+        <div class="card text-center ml-4">
+            <div class="card-header">
+                <h5 class="card-title mt-auto mb-auto">Consultation</h5>
+            </div>
+            <div class="card-body">
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        Doctor Name:
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DoctorProfile.FirstName)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        Patient Name:
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PatientProfile.FirstName)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ConsultationDate):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ConsultationDate)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Complaint):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Complaint)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Diagnosis):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Diagnosis)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Prescription):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Prescription)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Tests):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Tests)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Remarks):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Remarks)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CallType):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CallType)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Relation):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Relation)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ConsultationType):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ConsultationType)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ConsultationCharges):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ConsultationCharges)
+                    </dd>
+                    <hr class="line" />
+                    @*<a href="@Url.Action("EditAction","Doctor")" class="btn btn-primary d-block mt-5">Edit</a>*@
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .line{
+        width:100%;
+    }
+     .card {
+        box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+</style>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

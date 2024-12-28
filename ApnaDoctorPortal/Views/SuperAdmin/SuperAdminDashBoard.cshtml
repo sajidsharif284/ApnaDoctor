@@ -1,0 +1,152 @@
+﻿@model IEnumerable<ApnaDoctorPortal.Models.ClientTable>
+
+@{
+    ViewBag.Title = "SuperAdminDashBoard";
+    Layout = "~/Views/Shared/LayoutSuperAdmin.cshtml";
+}
+<style>
+    hr{
+        width:100% !important;
+    }
+</style>
+@foreach (var item in Model)
+{
+    <div class="col-md-4 mt-5 ml-1 mb-4">
+        <div class="card">
+            <div class="card-header text-white" style="background-color:#437a8f">
+                <h5 class="card-title text-center">@item.CompanyName</h5>
+            </div>
+            <div class="card-body">
+
+                <div class="template-demo">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h5 class="m-0">
+                                @item.POCName
+                            </h5>
+                            <p class="text-muted">
+                                <small  class="m-0 p-0">Phone: @item.POCPhoneNumber</small><br />
+                                <small  class="m-0 p-0">Email: @item.POCEmail</small><br />
+                                <small class="m-0 p-0">Subdomain: @item.Subdomain</small>
+                            </p>
+                        
+                        </div>
+                        <hr class="m-0 mb-1"/>
+                        <div class="col-md-12 text-center">
+                            <h5 class="m-0">
+                              Cycle: @item.PaymentCycle<br />
+                            </h5>
+                            <p></p>
+                            @if (item.PaymentStatus == "Success")
+                            {
+                                <div class="badge badge-success badge-pill">@item.PaymentStatus</div>
+                            }
+                            else
+                            {
+                                <div class="badge badge-danger badge-pill ">@item.PaymentStatus</div>
+                            }
+
+                            @if (item.Status == "Approved")
+                            {
+                                <div class="badge badge-success badge-pill">@item.Status</div>
+                            }
+                            else
+                            {
+                                <div class="badge badge-danger badge-pill ">@item.Status</div>
+                            }
+                            
+                            
+
+                        </div>
+                        <hr class="m-0 mb-1" />
+                        <div class="col-md-12">
+                          <strong>Android Package Name:</strong><br /><small class="m-0 p-0 text-muted"> @item.PackageNameAndroid</small><br />
+                            <strong>iOS Package Name:</strong><br /><small class="m-0 p-0 text-muted"> @item.PackageNameIOS</small><br />
+                            <strong>Basepath:</strong><br /><small class="m-0 p-0 text-muted"> @item.BasePath</small><br />
+                           
+                            <strong>Gmail:</strong><br /><small class="m-0 p-0 text-muted"> @item.Gmail</small><br />
+                            <strong>Password:</strong><br /><small class="m-0 p-0 text-muted"> @item.GmailPassword</small>
+                           
+                        </div>
+                        <hr class="m-0 mb-1" />
+                        <div class="col-md-12 ">
+                            <strong>Android ServerKey:</strong><br /><small class="m-0 p-0 text-muted"> @item.AndroidServerKey</small><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <a href="@Url.Action("EditClient","SuperAdmin",new { id=item.Id})" class="btn btn-info ">Edit</a>
+                <a href="@Url.Action("DetailOfClinic","SuperAdmin",new {id=item.Id , clinicname=item.CompanyName})" class="btn btn-primary ">Details</a>
+            </div>
+        </div>
+
+    </div>
+}
+<style>
+    .line {
+        width: 100%;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    .card {
+        box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+
+        $(document).on('click', ".modalopen", function () {
+            debugger;
+           
+            $('#slotBooking').modal('show');
+        });
+    })
+  
+
+</script>
+
+<div class="modal  fade in" id="slotBooking" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-blue">
+                <h4 class="modal-title ">Confirm Booking</h4>
+            </div>
+            <div class="modal-body text-center">
+                <img style="width:60%" src="~/Content/img/anim.gif" />
+                <p class="text-muted">You are going to set an appointment on </p>
+                <h4 style="color:#385370" id="dayName"></h4>
+                <h4 style="color:#385370" id="price"></h4>
+
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("BookSlot", "Patient", FormMethod.Post))
+            {
+                 
+
+                    <div id="availabe" class="d-inline">
+
+                    </div>
+
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="OnClientClose()">Close</button>
+                    <button type="submit" class="btn btn-primary">Book Appointment</button>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function OnClientClose() {
+        document.location.reload();
+    }
+</script>

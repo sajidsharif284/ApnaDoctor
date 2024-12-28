@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ApnaDoctor.Models.PrescribeDetials>
+
+@{
+    ViewBag.Title = "PatientMedicine";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+}
+
+<div class="row ml-2">
+    <h4 class="col-md-5 mt-4">Patient Medicine</h4>
+</div>
+<table class="table table-bordered table-striped table-hover styled-table ml-4" style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicineNames.MedicineName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Night)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Morning)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Days)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.quantity)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalNotes)
+            </th>
+        </tr>
+    </thead>
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicineNames.MedicineName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Night)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Morning)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Days)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalNotes)
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>

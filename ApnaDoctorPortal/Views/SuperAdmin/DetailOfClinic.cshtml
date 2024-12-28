@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "DetailOfClinic";
+    Layout = "~/Views/Shared/LayoutSuperAdmin.cshtml";
+    <link />
+}
+<style>
+    .bgcustom {
+        color: #437a8f;
+    }
+
+    .card-title {
+        margin-bottom: 0px !important;
+    }
+</style>
+<div class="card mt-5">
+    <div class="card-header text-white p-0">
+
+        <div class="breadcome-list m-0" style="background-color:#1b2a47">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="breadcomb-wp">
+                        <div class="breadcomb-icon">
+                            <i class="icon nalika-home"></i>
+                        </div>
+                        <div class="breadcomb-ctn">
+                            <h2>@ViewBag.ClinicName</h2>
+                            <p>Welcome to <span class="bread-ntd">@ViewBag.ClinicName</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="breadcomb-report">
+                        <button data-toggle="tooltip" data-placement="left" title="" class="btn" data-original-title="Download Report"><i class="icon nalika-download"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body text-center" style="background-color:rgba(0,0,0,.1)">
+        <div class="row pt-1">
+            <div class="col-md-3">
+                <div class="white-box analytics-info-cs mg-b-30 res-mg-t-30">
+                    <h3 class="box-title">Total Doctor</h3>
+                    <ul class="list-inline two-part-sp">
+                        <li>
+                            <div id="sparklinedash"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+                        </li>
+                        <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter sales-sts-ctn">@ViewBag.doctors</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="white-box analytics-info-cs mg-b-30 res-mg-t-30">
+                    <h3 class="box-title">Total Patient</h3>
+                    <ul class="list-inline two-part-sp">
+                        <li>
+                            <div id="sparklinedash2"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+                        </li>
+                        <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter sales-sts-ctn">@ViewBag.patient</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="white-box analytics-info-cs mg-b-30 res-mg-t-30">
+                    <h3 class="box-title">Total Earning</h3>
+                    <ul class="list-inline two-part-sp">
+                        <li>
+                            <div id="sparklinedash3"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+                        </li>
+                        <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter sales-sts-ctn">@ViewBag.amount</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="white-box analytics-info-cs mg-b-30 res-mg-t-30">
+                    <h3 class="box-title">Total Appointment</h3>
+                    <ul class="list-inline two-part-sp">
+                        <li>
+                            <div id="sparklinedash4"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+                        </li>
+                        <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter sales-sts-ctn">@ViewBag.appointment</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="white-box analytics-info-cs mg-b-30 res-mg-t-30">
+                    <h3 class="box-title">Total PayAmount</h3>
+                    <ul class="list-inline two-part-sp">
+                        <li>
+                            <div id="sparklinedash4"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+                        </li>
+                        <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter sales-sts-ctn">@ViewBag.TotalAmountPay</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><br /><br />
+
+<div class="mb-4">
+    @foreach (var item2 in ViewBag.ClinicImage)
+    {
+        var imgsrc = item2.Images;
+
+        <div class="col-md-3">
+            <img src='@imgsrc' style="height:150px" />
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,46 @@
+﻿@model ApnaDoctor.Models.Slots
+
+@{
+    ViewBag.Title = "AddDoctorSlots";
+    Layout = "~/Views/Shared/LayoutDoctor.cshtml";
+}
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4 style="margin-top:50px">Slots</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.SlotDuration, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.SlotDuration, new List<SelectListItem>()
+                        {
+                            new SelectListItem {Text = "5", Value = "5"},
+                             new SelectListItem {Text = "10", Value = "10"},
+                             new SelectListItem {Text = "15", Value = "15"},
+                             new SelectListItem {Text = "20", Value = "20"},
+                             new SelectListItem {Text = "25", Value = "25"},
+                             new SelectListItem {Text = "30", Value = "30"},
+                             new SelectListItem {Text = "35", Value = "35"},
+                             new SelectListItem {Text = "40", Value = "40"},
+                             new SelectListItem {Text = "45", Value = "45"},
+                             new SelectListItem {Text = "50", Value = "50"},
+                             new SelectListItem {Text = "55", Value = "55"},
+                             new SelectListItem {Text = "60", Value = "60"}
+                        }, "- Select Slot - ", new { @class = "form-control " })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+

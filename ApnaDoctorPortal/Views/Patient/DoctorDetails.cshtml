@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ApnaDoctor.Models.DoctorProfile>
+
+@{
+    ViewBag.Title = "DoctorDetails";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+    <link rel="stylesheet"href="~/Content/css/StyleSheet1.css"/>
+}
+@foreach (var item in Model)
+{
+    <div class="row pt-5 pb-3 ml-3">
+        <div class="card col-md-5 text-center">
+
+            <div class="card-body">
+                <div class="card-header">
+                    <h5 class="card-title">Doctor Detail</h5>
+                </div>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        DoctorName:
+                    </dt>
+
+                    <dd>
+                        @item.FirstName
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        Email:
+                    </dt>
+
+                    <dd>
+                        @item.ApplicationUser.Email
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        CNIC:
+                    </dt>
+
+                    <dd>
+                        @item.CNIC
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        Gender:
+                    </dt>
+
+                    <dd>
+                        @item.Gender
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        City:
+                    </dt>
+
+                    <dd>
+                        @item.City
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        Country:
+                    </dt>
+
+                    <dd>
+                        @item.Country
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        DateOfBirth:
+                    </dt>
+
+                    <dd>
+                        @item.DateOfBirth
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        MobileNo:
+                    </dt>
+
+                    <dd>
+                        @item.MobileNumber
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        Speciality:
+                    </dt>
+
+                    <dd>
+                        @item.DoctorSpecialty.Description
+                    </dd>
+                    <hr class="line" />
+
+                    @*<a href="#" class="btn btn-primary d-block modalopen" data-bookingid="@item.Id" data-Doctorslotscheduleid="@item.DoctorSlotSchedule.Id" data-slot="@item.DoctorSlotSchedule.Slot" data-doctorname="@item.DoctorProfile.FirstName" data-dayName="@item.DoctorSlotSchedule.Days">Cancel Appointment</a>*@
+
+                </dl>
+
+
+            </div>
+
+        </div>
+    </div>
+        }
+
+        <style>
+            .line {
+                width: 100%;
+            }
+
+            .card {
+                box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+                transition: 0.3s;
+            }
+
+            .dl-horizontal dt {
+                text-align: left;
+            }
+        </style>

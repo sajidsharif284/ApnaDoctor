@@ -1,0 +1,213 @@
+﻿@model ApnaDoctor.Models.DoctorProfile
+
+@{
+    ViewBag.Title = "DetailDoctorProfile";
+    Layout = "~/Views/Shared/LayoutDoctor.cshtml";
+    
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>
+}
+<div class="row pt-5 pb-3 ml-3" >
+    <div class="col-md-5">
+        <div class="card text-center">
+            <div class="card-header " >
+                <h5 class="card-title mt-auto mb-auto">Doctor Profile</h5>
+            </div>
+            <div class="card-body">
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CNIC):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CNIC)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateOfBirth):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DateOfBirth)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Gender):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Gender)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Country):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Country)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.City):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MobileNumber):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MobileNumber)
+                    </dd>
+                    @*<hr class="line" />
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DoctorSpecialtyId):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DoctorSpecialtyId)
+                        </dd>
+                        <hr class="line" />
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastConsultationTime):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LastConsultationTime)
+                        </dd>*@
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address):
+                    </dt>
+
+                    <dd style="text-align:center;width:204px;float:right;margin-top:-25px">
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+                    <div class="clear"></div>
+                    <hr class="line" />
+                    <a href="@Url.Action("EditDoctorProfile","Doctor",new { id=Model.ApplicationUserId})" class="btn btn-primary d-block">Edit</a>
+
+                </dl>
+
+
+            </div>
+
+        </div>
+        </div>
+        <div class="col-md-6 ml-5">
+
+            <div class="card text-center">
+                <div class="card-header">
+                    <h5 class="card-title mt-auto mb-auto" >Doctor Qualification</h5>
+                </div>
+                <div class="card-body">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                @*<th class="text-center">Name</th>*@
+                                <th class="text-center">DegreeName</th>
+                                <th class="text-center">YearTo</th>
+                                <th class="text-center">YearFrom</th>
+                                <th class="text-center">Institution</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item1 in ViewBag.qualification)
+                {
+                    <tbody>
+                        <tr>
+                            @*<td>@item1.DoctorProfile.FirstName</td>*@
+                            <td>@item1.DegreeName</td>
+                            <td>@item1.YearTo</td>
+                            <td>@item1.YearFrom</td>
+                            <td>@item1.Institution</td>
+                        </tr>
+                    </tbody>
+                }
+                    </table>
+
+
+
+                </div>
+
+            </div>
+            <div class="card text-center mt-5">
+                <div class="card-header">
+                    <h5 class="card-title mt-auto mb-auto">Doctor Schedule</h5>
+                </div>
+                <div class="card-body">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                @*<th class="text-center">Name</th>*@
+                                <th class="text-center">DayFrom</th>
+                                <th class="text-center">DayTo</th>
+                                <th class="text-center">StartTime</th>
+                                <th class="text-center">EndTime</th>
+                                <th class="text-center">Duration</th>
+                                <th class="text-center">Week</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item1 in ViewBag.schedule)
+                    {
+                    <tbody>
+                        <tr>
+                            @*<td>@item1.DoctorProfile.FirstName</td>*@
+                            <td>@item1.DayFrom</td>
+                            <td>@item1.DayTo</td>
+                            <td>@item1.StartTime</td>
+                            <td>@item1.EndTime</td>
+                            <td>@item1.SlotDuration</td>
+                            <td>@item1.Week</td>
+                        </tr>
+                    </tbody>
+                    }
+                    </table>
+
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+<style>
+    .line{
+        width:100%;
+    }
+    .clear{
+        clear:both;
+    }
+    .card {
+        box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+</style>

@@ -1,0 +1,137 @@
+﻿@model IEnumerable<ApnaDoctor.Models.PatientBookings>
+
+@{
+    ViewBag.Title = "PatientUpcomingAppointments";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+    @*<link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>*@
+}
+
+@foreach (var item in Model)
+{
+
+
+    <div class="col-md-4">
+        <div class="card text-center mt-4 ml-4 mb-4" style="height:380px">
+            
+            <div class="card-header">
+                <h5 class="card-title">Appointment Detail</h5>
+            </div>
+            <div class="card-body">
+               
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        DoctorName:
+                    </dt>
+
+                    <dd>
+                        @item.DoctorProfile.FirstName
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        Slot:
+                    </dt>
+
+                    <dd>
+                        @item.DoctorSlotSchedule.Slot
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        AppointmentDate:
+                    </dt>
+
+                    <dd>
+                        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.AppointmentDate))
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        BookingDate:
+                    </dt>
+
+                    <dd>
+                        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.BookingDate))
+                    </dd>
+                    <hr class="line" />
+
+
+                    <a href="#" class="btn btn-primary d-block modalopen" data-bookingid="@item.Id" data-Doctorslotscheduleid="@item.DoctorSlotSchedule.Id" data-slot="@item.DoctorSlotSchedule.Slot" data-doctorname="@item.DoctorProfile.FirstName" data-dayName="@item.DoctorSlotSchedule.Days">Cancel Appointment</a>
+
+                </dl>
+
+
+            </div>
+               
+        </div>
+    </div>
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="slotBooking" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-blue">
+                <h4 class="modal-title ">Cancel Appointment</h4>
+            </div>
+            <div class="modal-body text-center">
+                <img style="width:60%" src="~/Content/img/anim.gif" />
+                <p class="text-muted">You are going to Delete an appointment on </p>
+                <h4 style="color:#385370" id="dayname"></h4>
+
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("DeletePatientAppointment","Patient",FormMethod.Post))
+            {
+                @Html.Hidden("Bookingid")
+                @Html.Hidden("doctorslotscheduleid")
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Cancel Appointment</button>
+
+            }
+        </div>
+    </div>
+
+</div>
+</div>
+
+<script>
+    
+    $(document).ready(function()
+    {
+
+        $(document).on('click', ".modalopen", function () {
+            debugger;
+            $('#dayname').html($(this).attr('data-dayName') + " <small class='text-muted'>at</small> " + $(this).attr('data-slot') + ' <small class="text-muted"> with </small> \n \n' + $(this).attr('data-doctorname')).wrap('<pre />');
+            $('#Bookingid').val($(this).attr('data-bookingid'));
+            $('#doctorslotscheduleid').val($(this).attr('data-Doctorslotscheduleid'));
+            $('#slotBooking').modal('show');
+        });
+    })
+   
+
+</script>
+        <style>
+            .line {
+                width: 100%;
+            }
+
+            .card {
+                box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+                transition: 0.3s;
+                width:340px;
+            }
+            .dl-horizontal dt{
+                text-align:left;
+            }
+            .clear{
+                clear:both;
+            }
+
+        </style>

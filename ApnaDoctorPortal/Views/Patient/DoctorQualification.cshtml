@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ApnaDoctor.Models.DoctorQualification>
+
+@{
+    ViewBag.Title = "DoctorQualification";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+}
+<div class="row ml-4">
+    <h4 class="col-md-5 mt-4">Doctor Qualification</h4>
+</div>
+<table class="table-bordered table-striped table-hover styled-table ml-4" style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorProfile.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DegreeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Institution)
+            </th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorProfile.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DegreeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Institution)
+            </td>
+            
+        </tr>
+    </tbody>
+}
+
+</table>

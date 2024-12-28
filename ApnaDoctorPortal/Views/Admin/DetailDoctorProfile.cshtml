@@ -1,0 +1,159 @@
+﻿@model ApnaDoctor.Models.DoctorProfile
+
+@{
+    ViewBag.Title = "DetailDoctorProfile";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div class="row pt-5 pb-3 ml-3">
+    <div class="col-md-5">
+        <div class="card text-center">
+            <div class="card-header">
+                <h5 class="card-title">Doctor Profile</h5>
+            </div>
+            <div class="card-body">
+
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CNIC):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CNIC)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateOfBirth):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DateOfBirth)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Gender):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Gender)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Country):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Country)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.City):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MobileNumber):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MobileNumber)
+                    </dd>
+                    <hr class="line" />
+                    @*<dt>
+                            @Html.DisplayNameFor(model => model.DoctorSpecialtyId):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DoctorSpecialtyId)
+                        </dd>
+                        <hr class="line" />*@
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PhysicalAppointmentPrice):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PhysicalAppointmentPrice)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.VirtualAppointmentPrice):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.VirtualAppointmentPrice)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.VideoAppointmentPrice):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.VideoAppointmentPrice)
+                    </dd>
+                    @* <dt>
+                            @Html.DisplayNameFor(model => model.LastConsultationTime):
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LastConsultationTime)
+                        </dd>*@
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address):
+                    </dt>
+
+                    <dd style="text-align:center;width:204px;float:right;margin-top:-25px">
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+                    <div class="clear"></div>
+                    <hr class="line" />
+                    <a href="@Url.Action("EditDoctorProfile","Admin",new { id=Model.ApplicationUserId})" class="btn btn-primary d-block">Edit</a>
+
+                </dl>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .line {
+        width: 100%;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    .card {
+        box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+</style>

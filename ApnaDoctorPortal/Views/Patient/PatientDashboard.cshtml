@@ -1,0 +1,360 @@
+﻿@model IEnumerable<ApnaDoctor.Models.PatientBookings>
+
+@{
+    ViewBag.Title = "PatientDashboard";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+}
+ 
+<style>
+    .bgcustom {
+        color: #437a8f;
+    }
+
+    .card-title {
+        margin-bottom: 0px !important;
+    }
+</style>
+<div class="card mt-5 ml-4">
+    <div class="card-header text-white p-0">
+
+        <div class="breadcome-list m-0" style="background-color:#1b2a47">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="breadcomb-wp">
+                        <div class="breadcomb-icon">
+                            <i class="icon nalika-home"></i>
+                        </div>
+                        <div class="breadcomb-ctn">
+                            <h2>ApnaDoctor</h2>
+                            <p>Welcome to <span class="bread-ntd">ApnaDoctor</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="breadcomb-report">
+                        <button data-toggle="tooltip" data-placement="left" title="" class="btn" data-original-title="Download Report"><i class="icon nalika-download"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body text-center" style="background-color:rgba(0,0,0,.1)">
+        <div class="row pt-1">
+            <div class="col-md-3">
+                <div class="white-box analytics-info-cs mg-b-30 res-mg-t-30">
+                    <h3 class="box-title">Total Appointment</h3>
+                    <ul class="list-inline two-part-sp">
+                        <li>
+                            <div id="sparklinedash"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+                        </li>
+                        <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter sales-sts-ctn">@ViewBag.TotalAppointment</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="white-box analytics-info-cs mg-b-30 res-mg-t-30">
+                    <h3 class="box-title">Total Consultation</h3>
+                    <ul class="list-inline two-part-sp">
+                        <li>
+                            <div id="sparklinedash2"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+                        </li>
+                        <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter sales-sts-ctn">@ViewBag.TotalConsultation</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="white-box analytics-info-cs mg-b-30 res-mg-t-30">
+                    <h3 class="box-title">Total PayAmount</h3>
+                    <ul class="list-inline two-part-sp">
+                        <li>
+                            <div id="sparklinedash3"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas></div>
+                        </li>
+                        <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span class="counter sales-sts-ctn">@ViewBag.paidamount</span></li>
+                    </ul>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+</div>
+
+<div class="row ml-3">
+    <h4 class="col-md-5 mt-4">Appointments</h4>
+</div>
+
+
+<div class="pb-4">
+    <!-- Panel starts -->
+    <div class="panel panel-default ml-4" style="width:95%; padding:5px; margin:5px">
+        <div id="dvTab">
+            <!-- Navigation Tabs starts -->
+            <ul class="nav nav-tabs " role="tablist">
+                <li class="active"><a data-toggle="pill" href="#tab1">Today</a></li>
+                <li><a data-toggle="pill" href="#tab2">Upcoming</a></li>
+                <li><a data-toggle="pill" href="#tab3">History</a></li>
+                <li><a data-toggle="pill" href="#tab4">Consultation</a></li>
+            </ul>
+            <!-- Navigation Tabs ends -->
+            <!-- Tab Panes starts -->
+            <div class="tab-content" style="padding-top: 10px">
+                <div role="tabpanel" class="tab-pane active" id="tab1">
+                    <table class="table-bordered table-striped table-hover styled-table " style="width:100%">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    Doctor
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DoctorSlotSchedule.Days)
+                                </th>
+                                <th>
+                                    Patient
+                                </th>
+                                <th>
+                                    Slot
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AppointmentDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BookingDate)
+                                </th>
+                            </tr>
+                        </thead>
+
+                        @foreach (var item in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DoctorProfile.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DoctorSlotSchedule.Days)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PatientProfile.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DoctorSlotSchedule.Slot)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.AppointmentDate)*@
+                                        @Convert.ToString(string.Format("{0:MM/dd/yyyy}", item.AppointmentDate))
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BookingDate)
+                                    </td>
+                                   
+                                </tr>
+                            </tbody>
+                        }
+
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tab2">
+                    <table class="table-bordered table-striped table-hover styled-table" style="width:100%">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    Doctor
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DoctorSlotSchedule.Days)
+                                </th>
+                                <th>
+                                    Patient
+                                </th>
+                                <th>
+                                    Slot
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AppointmentDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BookingDate)
+                                </th>
+                            </tr>
+                        </thead>
+
+                        @foreach (var item in ViewBag.UpcomingAppointment)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @item.DoctorProfile.FirstName
+                                    </td>
+                                    <td>
+                                        @item.DoctorSlotSchedule.Days
+                                    </td>
+                                    <td>
+                                        @item.PatientProfile.FirstName
+                                    </td>
+                                    <td>
+                                        @item.DoctorSlotSchedule.Slot
+                                    </td>
+                                    <td>
+                                        @item.Status
+                                    </td>
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.AppointmentDate)*@
+                                        @Convert.ToString(string.Format("{0:MM/dd/yyyy}", item.AppointmentDate))
+                                    </td>
+                                    <td>
+                                        @item.BookingDate
+                                    </td>
+                                   
+                                </tr>
+                            </tbody>
+                        }
+
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tab3">
+                    <table class="table-bordered table-striped table-hover styled-table" style="width:100%">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    Doctor
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DoctorSlotSchedule.Days)
+                                </th>
+                                <th>
+                                    Patient
+                                </th>
+                                <th>
+                                    Slot
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AppointmentDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BookingDate)
+                                </th>
+                            </tr>
+                        </thead>
+
+                        @foreach (var item in ViewBag.AppointmentHistory)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @item.DoctorProfile.FirstName
+                                    </td>
+                                    <td>
+                                        @item.DoctorSlotSchedule.Days
+                                    </td>
+                                    <td>
+                                        @item.PatientProfile.FirstName
+                                    </td>
+                                    <td>
+                                        @item.DoctorSlotSchedule.Slot
+                                    </td>
+                                    <td>
+                                        @item.Status
+                                    </td>
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.AppointmentDate)*@
+                                        @Convert.ToString(string.Format("{0:MM/dd/yyyy}", item.AppointmentDate))
+                                    </td>
+                                    <td>
+                                        @item.BookingDate
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tab4">
+                    <table class="table table-bordered table-striped table-hover styled-table ml-4" style="width:95%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    DoctorName
+                                </th>
+                                <th>
+                                    PatientName
+                                </th>
+                                <th>
+                                    ConsultationDate
+                                </th>
+                                <th>
+                                   Complaint
+                                </th>
+
+                                <th>Detail</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (var item in ViewBag.Consultation)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @item.DoctorProfile.FirstName
+                                    </td>
+                                    <td>
+                                        @item.PatientProfile.FirstName
+                                    </td>
+                                    <td>
+                                        @item.ConsultationDate
+                                    </td>
+                                    <td>
+                                        @item.Complaint
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Medicine", "PatientMedicine", new { id = item.Id })
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+
+                    </table>
+                </div>
+            </div>
+            <!-- Tab Panes ends -->
+        </div>
+        <br />
+
+    </div>
+    <!-- Panel ends -->
+</div>
+
+<a href="@Url.Action("InsurancePolicy","Patient")" class="btn btn-primary d-block col-md-1 ml-4 mb-4"><img style="background-position:center;background-size:cover" src="~/Content/img/insurance.png"/></a><br /><br />
+
+@*<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>*@
+
+<style type="text/css">
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+        color: white;
+        cursor: default;
+        background-color: mediumslateblue;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+    }
+
+    .nav-tabs {
+        background-color: whitesmoke;
+    }
+</style>

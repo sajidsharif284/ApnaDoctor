@@ -1,0 +1,48 @@
+﻿@model ApnaDoctorPortal.Models.InsuranceCompany
+
+@{
+    ViewBag.Title = "View2";
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-parallax/1.1.3/jquery-parallax.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+   
+    <link rel="stylesheet" href="~/Content/css/parralax.css" />
+</head>
+<body>
+    <section>
+        <img src="~/Content/img/1.png" data-speed="-5" class="layer" />
+        <img src="~/Content/img/2.png" data-speed="5" class="layer" />
+        <img src="~/Content/img/3.png" data-speed="2" class="layer" />
+        <img src="~/Content/img/4.png" data-speed="6" class="layer" />
+        <img src="~/Content/img/5.png" data-speed="8" class="layer" />
+        <img src="~/Content/img/6.png" data-speed="-2" class="layer" />
+        <img src="~/Content/img/7.png" data-speed="4" class="layer" />
+        <img src="~/Content/img/8.png" data-speed="-9" class="layer" />
+        <img src="~/Content/img/9.png" data-speed="6" class="layer" />
+        <img src="~/Content/img/10.png" data-speed="-7" class="layer" />
+        <img src="~/Content/img/11.png" data-speed="-5" class="layer" />
+        <img src="~/Content/img/12.png" data-speed="5" class="layer" />
+        <h2 class="layer" data-speed="2">Parralax</h2>
+    </section>
+</body>
+</html>
+<script type="text/javascript">
+    document.addEventListener("mousemove", parallax);
+    function parallax(e) {
+        this.querySelectorAll('.layer').forEach(Layer=> {
+            const speed = layer.getAttribute('data-speed')
+            const x = (window.innerWidth - e.pageX * speed)/100
+            const y = (window.innerHeight - e.pageY * speed)/100
+            layer.style.transform = 'translateX(${x}px) translateY(${y}px)'
+        })
+
+    }
+</script>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ApnaDoctorPortal.Models.ClientTable>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutSuperAdmin.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>
+}
+
+<div class="row ml-2">
+    <h4 class="mt-4">Client Details</h4>
+</div>
+<table class="table table-bordered table-striped table-hover styled-table ml-3" style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subdomain)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentCycle)
+            </th>
+            
+            <th>Detail</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subdomain)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentCycle)
+            </td>
+            
+            <td>
+                
+                @Html.ActionLink("Details", "DetailClients", new { id = item.Id }) 
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>

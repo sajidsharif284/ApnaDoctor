@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ApnaDoctor.Models.DoctorSchedule>
+
+@{
+    ViewBag.Title = "DoctorSchedule";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+
+}
+<div class="row ml-4">
+    <h4 class="col-md-5 mt-4">Doctor Schedule</h4>
+</div>
+<table class="table-bordered table-striped table-hover styled-table ml-4" style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorProfile.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Week)
+            </th>
+        </tr>
+    </thead>
+
+@foreach (var item in ViewBag.schedule)
+{
+    <tbody>
+        <tr>
+            <td>
+                @item.FirstName
+            </td>
+            <td>
+                @item.DayFrom
+            </td>
+            <td>
+                @item.DayTo
+            </td>
+            <td>
+                @item.StartTime
+            </td>
+            <td>
+                @item.EndTime
+            </td>
+            <td>
+                @item.Week
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>

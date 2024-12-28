@@ -1,0 +1,202 @@
+﻿@model IEnumerable<ApnaDoctor.Models.DoctorProfile>
+
+@{
+    ViewBag.Title = "DoctorListForAppointment";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+<div class="row ml-4">
+    <h3 class="col-md-3 mt-4">Doctor List</h3>
+    <h3 class="mt-4 col-md-3 offset-md-3 text-right">Doctor Slots</h3>
+</div>
+<div class="row ml-4">
+
+    <div class="col-md-4 ">
+
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("DoctorListNew","Admin",new { doctorid=item.ApplicationUserId,patientid=@ViewBag.PatientId})" class="list-group-item list-group-item-action showbtn clickitem fc-state-active" data-virtualavailable="@item.VirtualAvailable" data-physicalavailable="@item.PhysicalAvailable" data-videoavailable="@item.InstantVideoAvailable" data-price="@item.PhysicalAppointmentPrice" data-name="@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)" data-id="@item.ApplicationUserId">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</a>
+
+            }
+        </div>
+    </div>
+    <div class="col-md-8 ">
+        @if (ViewBag.doctorid != null)
+            {
+            <div class="col-md-12">
+                @*<div>
+                         <div>
+                             <label class="col-md-2 offset-md-4 control-label" style="">Patient Name</label>
+                         </div>
+                         <input type="text" data-relation="" id="xcv" class="form-control col-md-5 offset-md-4" />
+                    </div>*@
+                <div class="form-group">
+                    <label class="col-md-2 offset-md-4 control-label" style="">Select Name</label>
+                    <div class="">
+                        @Html.DropDownList("Id", null, htmlAttributes: new { @class = "form-control col-md-5 offset-md-4 ", @id = "familymembername" })
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label class="col-md-2 offset-md-4 control-label" style="">Select Date</label>
+                    </div>
+                    <input type="date" data-date="" id="datepicker" class="form-control col-md-5 offset-md-4 " onchange="myFunc();" />
+                </div>
+
+
+            </div><br />
+        }
+        <div class="list-group row" style="flex-direction: unset !important;" id="temp">
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $(document).on('click', ".modalopen", function () {
+            debugger;
+            $('#dayName').html($(this).attr('data-dayName') + " <small class='text-muted'>at</small> " + $(this).attr('data-slotTime') + ' <small class="text-muted"> with </small> \n \n' + $(this).attr('data-DoctorName')).wrap('<pre />');
+            //$('#price').html($(this).attr('data-price') + " <small class='text-muted'>at</small> " + $(this).attr('data-slotTime') + ' <small class="text-muted"> with </small> \n \n' + $(this).attr('data-DoctorName')).wrap('<pre />');
+            var a = $(this).attr('data-virtualavailable');
+            var b = $(this).attr('data-physicalavailable');
+            var c = $(this).attr('data-videoavailable');
+            var l = $(this).attr('data-FamilyMemberId');
+            if (a == "True") {
+                var htmldata = '<input type="radio" name="Price" value="VirtualAppointmentPrice" required>Virtual &nbsp';
+            }
+            if (b == "True") {
+                var htmldata2 = '<input type="radio" name="Price" value="PhysicalAppointmentPrice">Physical &nbsp';
+            }
+            if (c == "True") {
+                var htmldata3 = '<input type="radio" name="Price" value="VideoAppointmentPrice">Video';
+            }
+
+            $("#availabe").append(htmldata);
+            $("#availabe").append(htmldata2);
+            $("#availabe").append(htmldata3);
+            $('#slotid').val($(this).attr('data-slotid'));
+            $('#Doctorid').val($(this).attr('data-doctorid'));
+            $('#familymemberid').val($(this).attr('data-FamilyMemberId'));
+            $('#patientid').val($(this).attr('data-Patientid'));
+            $('#slotBooking').modal('show');
+        });
+    })
+    function myFunc() {
+        debugger;
+        var id = '@ViewBag.doctorid';
+        patientid = '@ViewBag.PatientId';
+        var name = '@ViewBag.name';
+        var Virtual = '@ViewBag.Virtual';
+        var Physical = '@ViewBag.Physical';
+        var Video = '@ViewBag.Video';
+        var dateData = $("#datepicker").val();
+        var familymembername = $("#familymembername").val();
+        var virtualavailable = '@ViewBag.VirtualAvailable';
+        var physicalavailable ='@ViewBag.PhysicalAvailable';
+        var videoavailable = '@ViewBag.InstantVideoavilable';
+        var a = $(this).data("id");
+        if (dateData != '') {
+
+            //var url = "http://www.index.php?date=" + dateData;
+            //window.open(url);
+            $.ajax({
+                data: { dateData: dateData ,id:id},
+               // data: { id: id },
+                type: "POST",
+                url: '@Url.Action("DoctorSlotJson", "Admin")',
+                //contentType: "application/json; charset=utf-8",
+
+                //data: { id: id },
+                dataType: "json",
+                success: function (response) {
+
+
+                    $("#temp").html('');
+                    var html = '';
+                    if (response.length < 1) {
+
+                        $('#temp').append('<div class="d-block text-center w-100"><div class="text-center mb-3">No Slots Found</div><img src="/Content/img/animAppointment.gif" height="200px" width="200px"></div>');
+                    }
+
+                    for (i = 0; i < response.length; ++i) {
+
+                        var rrr = response[i];
+                        html += '<div class="col-md-12 mb-2" ><div class="card"><div class="card-header">' + rrr.Day + '</div><div class="card-body row">';
+                        for (j = 0; j < rrr.Slots.length; ++j) {
+
+                            html += '<div class="col-md-4"><a href="#" data-Patientid="' + patientid + '" data-FamilyMemberId="' + familymembername + '" data-videoavailable="' + videoavailable + '" data-physicalavailable="' + physicalavailable + '" data-virtualavailable="' + virtualavailable + '" data-Physical="' + Physical + '" data-Video="' + Video + '" data-Virtual="' + Virtual + '"   data-DoctorName="' + name + '"  data-doctorid="' + id + '" data-slotid="' + rrr.Slots[j].Id + '" data-dayName="' + rrr.Day + '" data-slotTime="' + rrr.Slots[j].Time + '" class="list-group-item list-group-item-action modalopen" >' + rrr.Slots[j].Time + '</a></div>';
+                        }
+
+
+
+                        html += '</div></div></div>';
+                    }
+                    console.log(html);
+                    $("#temp").append(html);
+                    console.log(response);
+                }
+
+            });
+        }
+    }
+
+
+</script>
+
+<div class="modal  fade in" id="slotBooking" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-blue">
+                <h4 class="modal-title ">Confirm Booking</h4>
+            </div>
+            <div class="modal-body text-center">
+                <img style="width:60%" src="~/Content/img/anim.gif" />
+                <p class="text-muted">You are going to set an appointment on </p>
+                <h4 style="color:#385370" id="dayName"></h4>
+                <h4 style="color:#385370" id="price"></h4>
+
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("BookSlot", "Admin", FormMethod.Post))
+            {
+                    @Html.Hidden("Doctorid")
+                    @Html.Hidden("slotid")
+                    @Html.Hidden("familymemberid")
+                    @Html.Hidden("patientid")
+
+                    <div id="availabe" class="d-inline">
+
+                    </div>
+
+                    //var orderid = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                    @*<p>@orderid</p>
+                        <p>@ViewBag.price</p>*@
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="OnClientClose()">Close</button>
+                    <button type="submit" class="btn btn-primary">Book Appointment</button>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function OnClientClose() {
+        document.location.reload();
+    }
+</script>

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<ApnaDoctorPortal.Models.ClientTable>
+
+@{
+    ViewBag.Title = "ListClinics";
+    Layout = "~/Views/Shared/LayoutSuperAdmin.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css" />
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+}
+
+<div class="row ml-4">
+    <h3 class="col-md-3 mt-4">Clinics List</h3>
+    <h3 class="mt-4 col-md-3 offset-md-3 text-right">Clinics detail</h3>
+</div>
+<div class="row ml-4">
+
+    <div class="col-md-4 ">
+
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("ListClinicsNew","SuperAdmin",new { id=item.Id})" class="list-group-item list-group-item-action showbtn clickitem fc-state-active" data-id="@item.Id" >@Html.DisplayFor(modelItem => item.CompanyName) </a>
+
+            }
+        </div>
+    </div>
+    <div class="col-md-8 ">
+            @if (ViewBag.doctors != null)
+            {
+                <div class="col-md-4 offset-md-2">
+                    <div class="card text-center">
+                        <div class="card-header text-white" style="background-color:#437a8f">
+                            <h5 class="card-title m-auto">Total Doctors</h5>
+                        </div>
+                        <div class="card-body text-center">
+
+                            <h1> @ViewBag.doctors</h1>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        @if (ViewBag.patient != null)
+            {
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-header text-white" style="background-color:#437a8f">
+                        <h5 class="card-title m-auto">Total Patients</h5>
+                    </div>
+                    <div class="card-body text-center">
+
+                        <h1> @ViewBag.patient</h1>
+                    </div>
+
+                </div>
+            </div>
+        }
+        @if (ViewBag.amount != null)
+            {
+            <div class="col-md-4 offset-md-2 mt-3">
+                <div class="card text-center">
+                    <div class="card-header text-white" style="background-color:#437a8f">
+                        <h5 class="card-title m-auto">Total Amount</h5>
+                    </div>
+                    <div class="card-body text-center">
+
+                        <h1> @ViewBag.amount</h1>
+                    </div>
+
+                </div>
+            </div>
+        }
+        @if (ViewBag.appointment != null)
+            {
+            <div class="col-md-4 mt-3">
+                <div class="card text-center">
+                    <div class="card-header text-white" style="background-color:#437a8f">
+                        <h5 class="card-title m-auto">Total Appointment</h5>
+                    </div>
+                    <div class="card-body text-center">
+
+                        <h1> @ViewBag.appointment</h1>
+                    </div>
+
+                </div>
+            </div>
+        }
+        @if (ViewBag.TotalAmountPay != null)
+            {
+            <div class="col-md-4 offset-md-4 mt-3">
+                <div class="card text-center">
+                    <div class="card-header text-white" style="background-color:#437a8f">
+                        <h5 class="card-title m-auto">Total PayAmount</h5>
+                    </div>
+                    <div class="card-body text-center">
+
+                        <h1> @ViewBag.TotalAmountPay</h1>
+                    </div>
+
+                </div>
+            </div>
+        }
+        </div>
+    
+</div>
+
+

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ApnaDoctor.Models.DoctorSchedule>
+
+@{
+    ViewBag.Title = "CheckDoctorSchedule";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h4 class="mt-4  ml-3">Doctor Schedule</h4>
+    <a href="@Url.Action("AddDoctorSchedule","Admin",new { id=Url.RequestContext.RouteData.Values["id"]})" class="btn btn-primary d-block mt-4 ml-3" style="">Add Schedule</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover styled-table" style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorProfile.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Week)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SlotDuration)
+            </th>
+
+        </tr>
+    </thead>
+
+    @foreach (var item in ViewBag.schedule)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @item.FirstName
+                </td>
+                <td>
+                    @item.DayFrom
+                </td>
+                <td>
+                    @item.DayTo
+                </td>
+                <td>
+                    @item.StartTime
+                </td>
+                <td>
+                    @item.EndTime
+                </td>
+                <td>
+                    @item.Week
+                </td>
+                <td>
+                    @item.SlotDuration
+                </td>
+
+            </tr>
+        </tbody>
+    }
+
+</table>

@@ -1,0 +1,303 @@
+﻿@model ApnaDoctor.Models.WeekDays
+
+@{
+    ViewBag.Title = "AddWeekDays";
+    Layout = "~/Views/Shared/LayoutDoctor.cshtml";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4 style="margin-top:50px">WeekDays</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Days, htmlAttributes: new { @class = "control-label col-md-2" }):<br /><br />
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Days, new List<SelectListItem>()
+                        {
+                            new SelectListItem {Text = "Monday", Value = "Monday"},
+                             new SelectListItem {Text = "Tuesday", Value = "Tuesday"},
+                             new SelectListItem {Text = "Wednesday", Value = "Wednesday"},
+                             new SelectListItem {Text = "Thursday", Value = "Thursday"},
+                             new SelectListItem {Text = "Friday", Value = "Friday"},
+                             new SelectListItem {Text = "Saturday", Value = "Saturday"},
+                             new SelectListItem {Text = "Sunday", Value = "Sunday"},
+                             
+                             new SelectListItem {Text = "Monday-Tuesday", Value = "Monday-Tuesday"},
+                             new SelectListItem {Text = "Monday-Wednesday", Value = "Monday-Wednesday"},
+                             new SelectListItem {Text = "Monday-Thursday", Value = "Monday-Thursday"},
+                             new SelectListItem {Text = "Monday-Friday", Value = "Monday-Friday"},
+                             new SelectListItem {Text = "Monday-Saturday", Value = "Monday-Saturday"},
+                             new SelectListItem {Text = "Monday-Sunday", Value = "Monday-Sunday"},
+
+                             new SelectListItem {Text = "Tuesday-WednesDay", Value = "Tuesday-WednesDay"},
+                             new SelectListItem {Text = "Tuesday-Thursday", Value = "Tuesday-Thursday"},
+                             new SelectListItem {Text = "Tuesday-Friday", Value = "Tuesday-Friday"},
+                             new SelectListItem {Text = "Tuesday-Saturday", Value = "Tuesday-Saturday"},
+                              new SelectListItem {Text = "Tuesday-Sunday", Value = "Tuesday-Sunday"},
+                             new SelectListItem {Text = "Wednesday-Thursday", Value = "Wednesday-Thursday"},
+                             new SelectListItem {Text = "Wednesday-Friday", Value = "Wednesday-Friday"},
+                             new SelectListItem {Text = "Wednesday-Saturday", Value = "Wednesday-Saturday"},
+                             new SelectListItem {Text = "Wednesday-Sunday", Value = "Wednesday-Sunday"},
+                             new SelectListItem {Text = "Thursday-Friday", Value = "Thursday-Friday"},
+                             new SelectListItem {Text = "Thursday-Saturday", Value = "Thursday-Saturday"},
+                             new SelectListItem {Text = "Thursday-Sunday", Value = "Thursday-Sunday"},
+                             new SelectListItem {Text = "Friday-Saturday", Value = "Friday-Saturday"},
+                             new SelectListItem {Text = "Friday-Sunday", Value = "Friday-Sunday"},
+                             new SelectListItem {Text = "Saturday-Sunday", Value = "Saturday-Sunday"},
+                             new SelectListItem {Text = "Sunday-Monday", Value = "Sunday-Monday"},
+                             new SelectListItem {Text = "Sunday-Tuesday", Value = "Sunday-Tuesday"},
+                             new SelectListItem {Text = "Sunday-Wednesday", Value = "Sunday-Wednesday"},
+                             new SelectListItem {Text = "Sunday-Thursday", Value = "Sunday-Thursday"},
+                             new SelectListItem {Text = "Sunday-Friday", Value = "Sunday-Friday"},
+                             new SelectListItem {Text = "Sunday-Saturday", Value = "Sunday-Saturday"}
+
+                        }, "- Select Day - ", new { @class = "form-control " })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" }):<br /><br />
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.StartTime, new List<SelectListItem>()
+                        {
+                             new SelectListItem {Text = "12:00 AM", Value = "12:00 AM"},
+                             new SelectListItem {Text = "12:15 AM", Value = "12:15 AM"},
+                             new SelectListItem {Text = "12:30 AM", Value = "12:30 AM"},
+                             new SelectListItem {Text = "12:45 AM", Value = "12:45 AM"},
+                             new SelectListItem {Text = "01:00 AM", Value = "01:00 AM"},
+                             new SelectListItem {Text = "01:15 AM", Value = "01:15 AM"},
+                             new SelectListItem {Text = "01:30 AM", Value = "01:30 AM"},
+                             new SelectListItem {Text = "01:45 AM", Value = "01:45 AM"},
+                             new SelectListItem {Text = "02:00 AM", Value = "02:00 AM"},
+                             new SelectListItem {Text = "02:15 AM", Value = "02:15 AM"},
+                             new SelectListItem {Text = "02:30 AM", Value = "02:30 AM"},
+                             new SelectListItem {Text = "02:45 AM", Value = "02:45 AM"},
+                             new SelectListItem {Text = "03:00 AM", Value = "03:00 AM"},
+                             new SelectListItem {Text = "03:15 AM", Value = "03:15 AM"},
+                             new SelectListItem {Text = "03:30 AM", Value = "03:30 AM"},
+                             new SelectListItem {Text = "03:45 AM", Value = "03:45 AM"},
+                             new SelectListItem {Text = "04:00 AM", Value = "04:00 AM"},
+                             new SelectListItem {Text = "04:15 AM", Value = "04:15 AM"},
+                             new SelectListItem {Text = "04:30 AM", Value = "04:30 AM"},
+                             new SelectListItem {Text = "04:45 AM", Value = "04:45 AM"},
+                             new SelectListItem {Text = "05:00 AM", Value = "05:00 AM"},
+                             new SelectListItem {Text = "05:15 AM", Value = "05:15 AM"},
+                             new SelectListItem {Text = "05:30 AM", Value = "05:30 AM"},
+                             new SelectListItem {Text = "05:45 AM", Value = "05:45 AM"},
+                             new SelectListItem {Text = "06:00 AM", Value = "06:00 AM"},
+                             new SelectListItem {Text = "06:15 AM", Value = "06:15 AM"},
+                             new SelectListItem {Text = "06:30 AM", Value = "06:30 AM"},
+                             new SelectListItem {Text = "06:45 AM", Value = "06:45 AM"},
+                             new SelectListItem {Text = "07:00 AM", Value = "07:00 AM"},
+                             new SelectListItem {Text = "07:15 AM", Value = "07:15 AM"},
+                             new SelectListItem {Text = "07:30 AM", Value = "07:30 AM"},
+                             new SelectListItem {Text = "07:45 AM", Value = "07:45 AM"},
+                             new SelectListItem {Text = "08:00 AM", Value = "08:00 AM"},
+                             new SelectListItem {Text = "08:15 AM", Value = "08:15 AM"},
+                             new SelectListItem {Text = "08:30 AM", Value = "08:30 AM"},
+                             new SelectListItem {Text = "08:45 AM", Value = "08:45 AM"},
+                             new SelectListItem {Text = "09:00 AM", Value = "09:00 AM"},
+                             new SelectListItem {Text = "09:15 AM", Value = "09:15 AM"},
+                             new SelectListItem {Text = "09:30 AM", Value = "09:30 AM"},
+                             new SelectListItem {Text = "09:45 AM", Value = "09:45 AM"},
+                             new SelectListItem {Text = "10:00 AM", Value = "10:00 AM"},
+                             new SelectListItem {Text = "10:15 AM", Value = "10:15 AM"},
+                             new SelectListItem {Text = "10:30 AM", Value = "10:30 AM"},
+                             new SelectListItem {Text = "10:45 AM", Value = "10:45 AM"},
+                             new SelectListItem {Text = "11:00 AM", Value = "11:00 AM"},
+                             new SelectListItem {Text = "11:15 AM", Value = "11:15 AM"},
+                             new SelectListItem {Text = "11:30 AM", Value = "11:30 AM"},
+                             new SelectListItem {Text = "11:45 AM", Value = "11:45 AM"},
+
+                             new SelectListItem {Text = "12:00 PM", Value = "12:00 PM"},
+                             new SelectListItem {Text = "12:15 PM", Value = "12:15 PM"},
+                             new SelectListItem {Text = "12:30 PM", Value = "12:30 PM"},
+                             new SelectListItem {Text = "12:45 PM", Value = "12:45 PM"},
+                             new SelectListItem {Text = "01:00 PM", Value = "01:00 PM"},
+                             new SelectListItem {Text = "01:15 PM", Value = "01:15 PM"},
+                             new SelectListItem {Text = "01:30 PM", Value = "01:30 PM"},
+                             new SelectListItem {Text = "01:45 PM", Value = "01:45 PM"},
+                             new SelectListItem {Text = "02:00 PM", Value = "02:00 PM"},
+                             new SelectListItem {Text = "02:15 PM", Value = "02:15 PM"},
+                             new SelectListItem {Text = "02:30 PM", Value = "02:30 PM"},
+                             new SelectListItem {Text = "02:45 PM", Value = "02:45 PM"},
+                             new SelectListItem {Text = "03:00 PM", Value = "03:00 PM"},
+                             new SelectListItem {Text = "03:15 PM", Value = "03:15 PM"},
+                             new SelectListItem {Text = "03:30 PM", Value = "03:00 PM"},
+                             new SelectListItem {Text = "03:45 PM", Value = "03:45 PM"},
+                             new SelectListItem {Text = "04:00 PM", Value = "04:00 PM"},
+                             new SelectListItem {Text = "04:15 PM", Value = "04:15 PM"},
+                             new SelectListItem {Text = "04:30 PM", Value = "04:30 PM"},
+                             new SelectListItem {Text = "04:45 PM", Value = "04:45 PM"},
+                             new SelectListItem {Text = "05:00 PM", Value = "05:00 PM"},
+                             new SelectListItem {Text = "05:15 PM", Value = "05:15 PM"},
+                             new SelectListItem {Text = "05:30 PM", Value = "05:30 PM"},
+                             new SelectListItem {Text = "05:45 PM", Value = "05:45 PM"},
+                             new SelectListItem {Text = "06:00 PM", Value = "06:00 PM"},
+                             new SelectListItem {Text = "06:15 PM", Value = "06:15 PM"},
+                             new SelectListItem {Text = "06:30 PM", Value = "06:30 PM"},
+                             new SelectListItem {Text = "06:45 PM", Value = "06:45 PM"},
+                             new SelectListItem {Text = "07:00 PM", Value = "07:00 PM"},
+                             new SelectListItem {Text = "07:15 PM", Value = "07:15 PM"},
+                             new SelectListItem {Text = "07:30 PM", Value = "07:30 PM"},
+                             new SelectListItem {Text = "07:45 PM", Value = "07:45 PM"},
+                             new SelectListItem {Text = "08:00 PM", Value = "08:00 PM"},
+                             new SelectListItem {Text = "08:15 PM", Value = "08:15 PM"},
+                             new SelectListItem {Text = "08:30 PM", Value = "08:30 PM"},
+                             new SelectListItem {Text = "08:45 PM", Value = "08:45 PM"},
+                             new SelectListItem {Text = "09:00 PM", Value = "09:00 PM"},
+                             new SelectListItem {Text = "09:15 PM", Value = "09:15 PM"},
+                             new SelectListItem {Text = "09:30 PM", Value = "09:30 PM"},
+                             new SelectListItem {Text = "09:45 PM", Value = "09:45 PM"},
+                             new SelectListItem {Text = "10:00 PM", Value = "10:00 PM"},
+                             new SelectListItem {Text = "10:15 PM", Value = "10:15 PM"},
+                             new SelectListItem {Text = "10:30 PM", Value = "10:30 PM"},
+                             new SelectListItem {Text = "10:45 PM", Value = "10:45 PM"},
+                             new SelectListItem {Text = "11:00 PM", Value = "11:00 PM"},
+                             new SelectListItem {Text = "11:15 PM", Value = "11:15 PM"},
+                             new SelectListItem {Text = "11:30 PM", Value = "11:30 PM"},
+                             new SelectListItem {Text = "11:45 PM", Value = "11:45 PM"}
+
+
+                        }, "- Select StartTime - ", new { @class = "form-control " })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" }):<br /><br />
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.EndTime, new List<SelectListItem>()
+                        {
+                             new SelectListItem {Text = "12:00 AM", Value = "12:00 AM"},
+                             new SelectListItem {Text = "12:15 AM", Value = "12:15 AM"},
+                             new SelectListItem {Text = "12:30 AM", Value = "12:30 AM"},
+                             new SelectListItem {Text = "12:45 AM", Value = "12:45 AM"},
+                             new SelectListItem {Text = "01:00 AM", Value = "01:00 AM"},
+                             new SelectListItem {Text = "01:15 AM", Value = "01:15 AM"},
+                             new SelectListItem {Text = "01:30 AM", Value = "01:30 AM"},
+                             new SelectListItem {Text = "01:45 AM", Value = "01:45 AM"},
+                             new SelectListItem {Text = "02:00 AM", Value = "02:00 AM"},
+                             new SelectListItem {Text = "02:15 AM", Value = "02:15 AM"},
+                             new SelectListItem {Text = "02:30 AM", Value = "02:30 AM"},
+                             new SelectListItem {Text = "02:45 AM", Value = "02:45 AM"},
+                             new SelectListItem {Text = "03:00 AM", Value = "03:00 AM"},
+                             new SelectListItem {Text = "03:15 AM", Value = "03:15 AM"},
+                             new SelectListItem {Text = "03:30 AM", Value = "03:30 AM"},
+                             new SelectListItem {Text = "03:45 AM", Value = "03:45 AM"},
+                             new SelectListItem {Text = "04:00 AM", Value = "04:00 AM"},
+                             new SelectListItem {Text = "04:15 AM", Value = "04:15 AM"},
+                             new SelectListItem {Text = "04:30 AM", Value = "04:30 AM"},
+                             new SelectListItem {Text = "04:45 AM", Value = "04:45 AM"},
+                             new SelectListItem {Text = "05:00 AM", Value = "05:00 AM"},
+                             new SelectListItem {Text = "05:15 AM", Value = "05:15 AM"},
+                             new SelectListItem {Text = "05:30 AM", Value = "05:30 AM"},
+                             new SelectListItem {Text = "05:45 AM", Value = "05:45 AM"},
+                             new SelectListItem {Text = "06:00 AM", Value = "06:00 AM"},
+                             new SelectListItem {Text = "06:15 AM", Value = "06:15 AM"},
+                             new SelectListItem {Text = "06:30 AM", Value = "06:30 AM"},
+                             new SelectListItem {Text = "06:45 AM", Value = "06:45 AM"},
+                             new SelectListItem {Text = "07:00 AM", Value = "07:00 AM"},
+                             new SelectListItem {Text = "07:15 AM", Value = "07:15 AM"},
+                             new SelectListItem {Text = "07:30 AM", Value = "07:30 AM"},
+                             new SelectListItem {Text = "07:45 AM", Value = "07:45 AM"},
+                             new SelectListItem {Text = "08:00 AM", Value = "08:00 AM"},
+                             new SelectListItem {Text = "08:15 AM", Value = "08:15 AM"},
+                             new SelectListItem {Text = "08:30 AM", Value = "08:30 AM"},
+                             new SelectListItem {Text = "08:45 AM", Value = "08:45 AM"},
+                             new SelectListItem {Text = "09:00 AM", Value = "09:00 AM"},
+                             new SelectListItem {Text = "09:15 AM", Value = "09:15 AM"},
+                             new SelectListItem {Text = "09:30 AM", Value = "09:30 AM"},
+                             new SelectListItem {Text = "09:45 AM", Value = "09:45 AM"},
+                             new SelectListItem {Text = "10:00 AM", Value = "10:00 AM"},
+                             new SelectListItem {Text = "10:15 AM", Value = "10:15 AM"},
+                             new SelectListItem {Text = "10:30 AM", Value = "10:30 AM"},
+                             new SelectListItem {Text = "10:45 AM", Value = "10:45 AM"},
+                             new SelectListItem {Text = "11:00 AM", Value = "11:00 AM"},
+                             new SelectListItem {Text = "11:15 AM", Value = "11:15 AM"},
+                             new SelectListItem {Text = "11:30 AM", Value = "11:30 AM"},
+                             new SelectListItem {Text = "11:45 AM", Value = "11:45 AM"},
+
+                             new SelectListItem {Text = "12:00 PM", Value = "12:00 PM"},
+                             new SelectListItem {Text = "12:15 PM", Value = "12:15 PM"},
+                             new SelectListItem {Text = "12:30 PM", Value = "12:30 PM"},
+                             new SelectListItem {Text = "12:45 PM", Value = "12:45 PM"},
+                             new SelectListItem {Text = "01:00 PM", Value = "01:00 PM"},
+                             new SelectListItem {Text = "01:15 PM", Value = "01:15 PM"},
+                             new SelectListItem {Text = "01:30 PM", Value = "01:30 PM"},
+                             new SelectListItem {Text = "01:45 PM", Value = "01:45 PM"},
+                             new SelectListItem {Text = "02:00 PM", Value = "02:00 PM"},
+                             new SelectListItem {Text = "02:15 PM", Value = "02:15 PM"},
+                             new SelectListItem {Text = "02:30 PM", Value = "02:30 PM"},
+                             new SelectListItem {Text = "02:45 PM", Value = "02:45 PM"},
+                             new SelectListItem {Text = "03:00 PM", Value = "03:00 PM"},
+                             new SelectListItem {Text = "03:15 PM", Value = "03:15 PM"},
+                             new SelectListItem {Text = "03:30 PM", Value = "03:00 PM"},
+                             new SelectListItem {Text = "03:45 PM", Value = "03:45 PM"},
+                             new SelectListItem {Text = "04:00 PM", Value = "04:00 PM"},
+                             new SelectListItem {Text = "04:15 PM", Value = "04:15 PM"},
+                             new SelectListItem {Text = "04:30 PM", Value = "04:30 PM"},
+                             new SelectListItem {Text = "04:45 PM", Value = "04:45 PM"},
+                             new SelectListItem {Text = "05:00 PM", Value = "05:00 PM"},
+                             new SelectListItem {Text = "05:15 PM", Value = "05:15 PM"},
+                             new SelectListItem {Text = "05:30 PM", Value = "05:30 PM"},
+                             new SelectListItem {Text = "05:45 PM", Value = "05:45 PM"},
+                             new SelectListItem {Text = "06:00 PM", Value = "06:00 PM"},
+                             new SelectListItem {Text = "06:15 PM", Value = "06:15 PM"},
+                             new SelectListItem {Text = "06:30 PM", Value = "06:30 PM"},
+                             new SelectListItem {Text = "06:45 PM", Value = "06:45 PM"},
+                             new SelectListItem {Text = "07:00 PM", Value = "07:00 PM"},
+                             new SelectListItem {Text = "07:15 PM", Value = "07:15 PM"},
+                             new SelectListItem {Text = "07:30 PM", Value = "07:30 PM"},
+                             new SelectListItem {Text = "07:45 PM", Value = "07:45 PM"},
+                             new SelectListItem {Text = "08:00 PM", Value = "08:00 PM"},
+                             new SelectListItem {Text = "08:15 PM", Value = "08:15 PM"},
+                             new SelectListItem {Text = "08:30 PM", Value = "08:30 PM"},
+                             new SelectListItem {Text = "08:45 PM", Value = "08:45 PM"},
+                             new SelectListItem {Text = "09:00 PM", Value = "09:00 PM"},
+                             new SelectListItem {Text = "09:15 PM", Value = "09:15 PM"},
+                             new SelectListItem {Text = "09:30 PM", Value = "09:30 PM"},
+                             new SelectListItem {Text = "09:45 PM", Value = "09:45 PM"},
+                             new SelectListItem {Text = "10:00 PM", Value = "10:00 PM"},
+                             new SelectListItem {Text = "10:15 PM", Value = "10:15 PM"},
+                             new SelectListItem {Text = "10:30 PM", Value = "10:30 PM"},
+                             new SelectListItem {Text = "10:45 PM", Value = "10:45 PM"},
+                             new SelectListItem {Text = "11:00 PM", Value = "11:00 PM"},
+                             new SelectListItem {Text = "11:15 PM", Value = "11:15 PM"},
+                             new SelectListItem {Text = "11:30 PM", Value = "11:30 PM"},
+                             new SelectListItem {Text = "11:45 PM", Value = "11:45 PM"}
+
+
+                        }, "- Select EndTime - ", new { @class = "form-control " })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SlotDuration, htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.SlotDuration, new List<SelectListItem>()
+                        {
+                            new SelectListItem {Text = "5", Value = "5"},
+                             new SelectListItem {Text = "10", Value = "10"},
+                             new SelectListItem {Text = "15", Value = "15"},
+                             new SelectListItem {Text = "20", Value = "20"},
+                             new SelectListItem {Text = "25", Value = "25"},
+                             new SelectListItem {Text = "30", Value = "30"},
+                             new SelectListItem {Text = "35", Value = "35"},
+                             new SelectListItem {Text = "40", Value = "40"},
+                             new SelectListItem {Text = "45", Value = "45"},
+                             new SelectListItem {Text = "50", Value = "50"},
+                             new SelectListItem {Text = "55", Value = "55"},
+                             new SelectListItem {Text = "60", Value = "60"}
+                        }, "- Select Slot - ", new { @class = "form-control " })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+

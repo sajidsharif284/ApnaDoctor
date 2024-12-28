@@ -1,0 +1,47 @@
+﻿*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+main{
+    background-image:url(../img/loginregisterbackground.jpg);
+    height:100vh;
+    background-position:center;
+    background-size:cover;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.parent{
+   width:1366px;
+    height:515px;
+    
+}
+.col-md-4{
+      background-color:white;
+}
+.form-control{
+    height:40px;
+    border-radius:25px;
+    margin-top:3px;
+}
+.control-label{
+    display:inline;
+    font-size:18px;
+}
+.btnlogin{
+    height:40px;
+    border-radius:25px;
+    display:block;
+    background-color:dodgerblue;
+    line-height:10px;
+    color:white;
+}
+.btnlogin:hover{
+    color:black;
+}
+.head{
+    text-align:center;
+    margin-top:15px;
+}

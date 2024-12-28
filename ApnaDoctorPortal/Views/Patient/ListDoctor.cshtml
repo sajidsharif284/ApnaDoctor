@@ -1,0 +1,170 @@
+﻿@model IEnumerable<ApnaDoctor.Models.DoctorProfile>
+
+@{
+    ViewBag.Title = "ListDoctor";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+<div class="row ml-5">
+   <a href="@Url.Action("PatientUpcomingAppointments","Patient")" class="btn btn-primary d-block mt-4">Upcoming Appointment</a>
+    <a href="@Url.Action("PatientAppointmentHistory","Patient")" class="btn btn-primary d-block mt-4 ml-2">Appointment History</a>
+</div>
+
+<div class="row ml-4">
+    <h3 class="col-md-3 mt-4">Doctor List</h3>
+        <h3 class="mt-4 col-md-3 offset-md-3 text-right">Doctor Slots</h3>
+</div>
+<div class="row ml-4">
+    
+    <div class="col-md-4 ">
+
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                <a href="#" class="list-group-item list-group-item-action showbtn clickitem fc-state-active" data-virtual="@item.VirtualAvailable" data-physical="@item.PhysicalAvailable" data-video="@item.InstantVideoAvailable" data-price="@item.PhysicalAppointmentPrice" data-name="@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)" data-id="@item.ApplicationUserId">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</a>
+                
+            }
+        </div>
+    </div>
+    <div class="col-md-8 ">
+        
+        <div class="list-group row" style="flex-direction: unset !important;" id="temp">
+            
+                
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function()
+    {
+
+        $(document).on('click', ".modalopen", function () {
+            debugger;
+            $('#dayName').html($(this).attr('data-dayName') + " <small class='text-muted'>at</small> " + $(this).attr('data-slotTime') + ' <small class="text-muted"> with </small> \n \n' + $(this).attr('data-DoctorName')).wrap('<pre />');
+            //$('#price').html($(this).attr('data-price') + " <small class='text-muted'>at</small> " + $(this).attr('data-slotTime') + ' <small class="text-muted"> with </small> \n \n' + $(this).attr('data-DoctorName')).wrap('<pre />');
+            var a = $(this).attr('data-Virtual');
+            var b = $(this).attr('data-Physical');
+            var c = $(this).attr('data-Video');
+            if (a == "True")
+            {
+                var htmldata = '<input type="radio" name="Price" value="VirtualAppointmentPrice" required>Virtual &nbsp';
+            }
+            if (b == "True") {
+                var htmldata2 = '<input type="radio" name="Price" value="PhysicalAppointmentPrice">Physical &nbsp';
+            }
+            if (c == "True") {
+                var htmldata3 = '<input type="radio" name="Price" value="VideoAppointmentPrice">Video';
+            }
+            
+            $("#availabe").append(htmldata);
+            $("#availabe").append(htmldata2);
+            $("#availabe").append(htmldata3);
+            $('#slotid').val($(this).attr('data-slotid'));
+            $('#Doctorid').val($(this).attr('data-doctorid'));
+            $('#slotBooking').modal('show');
+        });
+    })
+   
+
+    $(".clickitem").click(function () {
+        debugger;
+        var id = $(this).data("id");
+        var name = $(this).data("name");
+        var price = $(this).data("price");
+        var virtual = $(this).data("virtual");
+        var physical = $(this).data("physical");
+        var video = $(this).data("video");
+        // var rrr = "";
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ListDoctorNew", "Patient")',
+            //contentType: "application/json; charset=utf-8",
+            data: { id: id },
+            dataType: "json",
+            success: function (response) {
+                
+                   
+                $("#temp").html('');
+                var html = '';
+                if (response.length < 1) {
+                   
+                    $('#temp').append('<div class="d-block text-center w-100"><div class="text-center mb-3">No Slots Found</div><img src="/Content/img/animAppointment.gif" height="200px" width="200px"></div>');
+                }
+
+                for (i = 0; i < response.length; ++i) {
+                    
+                    var rrr = response[i];
+                    html += '<div class="col-md-12 mb-2" ><div class="card"><div class="card-header">' + rrr.Day + '</div><div class="card-body row">';
+                    for (j = 0; j < rrr.Slots.length; ++j) {
+
+                        html += '<div class="col-md-4"><a href="#" data-Physical="' + physical + '" data-Video="' + video + '" data-Virtual="' + virtual + '"   data-DoctorName="' + name + '" data-price="' + price + '"  data-doctorid="' + id + '" data-slotid="' + rrr.Slots[j].Id + '" data-dayName="' + rrr.Day + '" data-slotTime="' + rrr.Slots[j].Time + '" class="list-group-item list-group-item-action modalopen" >' + rrr.Slots[j].Time + '</a></div>';
+                    }
+
+
+
+                    html += '</div></div></div>';
+                }
+                console.log(html);
+                $("#temp").append(html);
+                console.log(response);
+
+                //$('#result').html(response);
+            }
+        });
+
+    })
+</script>
+
+
+
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal  fade in" id="slotBooking" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-blue">
+                <h4 class="modal-title ">Confirm Booking</h4>
+            </div>
+            <div class="modal-body text-center">
+                <img  style="width:60%" src="~/Content/img/anim.gif" />
+               <p class="text-muted">You are going to set an appointment on </p>
+                <h4  style="color:#385370" id="dayName"></h4>
+                <h4 style="color:#385370" id="price"></h4>
+               
+            </div>
+            <div class="modal-footer">@using (Html.BeginForm("BookSlot", "Patient",FormMethod.Post)) 
+            {
+                @Html.Hidden("Doctorid")
+                @Html.Hidden("slotid")
+
+                <div id="availabe" class="d-inline">
+
+                </div>
+
+                //var orderid = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                    @*<p>@orderid</p>
+                    <p>@ViewBag.price</p>*@
+                    <br />
+                    <br />
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="OnClientClose()">Close</button>
+                <button type="submit" class="btn btn-primary">Book Appointment</button>
+            }
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function OnClientClose() {
+        document.location.reload();
+    }
+</script>

@@ -1,0 +1,211 @@
+﻿
+@{
+    ViewBag.Title = "PaymentMethod";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+
+<a href="#" class="clickitem">
+    <div class="row mt-4 ml-4">
+        <div class="col-md-4 p-2" style="background-color:white;color:black;border:1px solid #ccc;border-radius:10px;cursor:pointer">
+            <img src="~/Content/img/bank-alfalah.png" style="width:60px;height:40px;" />
+            <label class="ml-3" style="width:200px">Bank Alfalah Wallet</label>
+            <img src="~/Content/img/next_arrow.png" style="width:60px;height:40px;" class="ml-4" />
+        </div>
+    </div>
+</a>
+
+<a href="@Url.Action("JSPhoneNo","Patient",new { orderid=@ViewBag.OrderId,amount=@ViewBag.Amount})" class="jsbank" style="cursor:pointer">
+    <div class="row mt-1 ml-4">
+        <div class="col-md-4 p-2" style="background-color:white;color:black;border:1px solid #ccc;border-radius:10px;cursor:pointer">
+
+            <img src="~/Content/img/jsbank.png" style="width:60px;height:40px" />
+            <label class="ml-3" style="width:200px">JS Bank Wallet</label>
+            <img src="~/Content/img/next_arrow.png" style="width:60px;height:40px;" class="ml-4" />
+        </div>
+    </div>
+</a>
+
+<a href="#" class="easypaisa" style="cursor:pointer" data-OrderId="@ViewBag.OrderId" data-Amount="@ViewBag.Amount">
+    <div class="row mt-1 ml-4">
+        <div class="col-md-4 p-2" style="background-color:white;color:black;border:1px solid #ccc;border-radius:10px;cursor:pointer">
+            <img src="~/Content/img/easypaisa2.png" style="width:60px;height:40px" />
+            <label class="ml-3" style="width:200px">EasyPaisa Wallet</label>
+            <img src="~/Content/img/next_arrow.png" style="width:60px;height:40px;" class="ml-4" />
+        </div>
+    </div>
+</a>
+
+<a href="#" class="jazzcash" style="cursor:pointer" data-OrderId="@ViewBag.OrderId" data-Amount="@ViewBag.Amount">
+    <div class="row mt-1 ml-4">
+        <div class="col-md-4 p-2" style="background-color:white;color:black;border:1px solid #ccc;border-radius:10px">
+            <img src="~/Content/img/jazzcash.jpg" style="width:60px;height:40px" class="" />
+            <label class="ml-3 " style="width:200px">JazzCash Wallet</label>
+            <img src="~/Content/img/next_arrow.png" style="width:60px;height:40px" class="ml-4" />
+        </div>
+    </div>
+</a>
+
+    <script>
+       
+        $(document).ready(function()
+        {
+
+            $(document).on('click', ".jazzcash", function () {
+                debugger;
+                $('#orderid').val($(this).attr('data-OrderId'));
+                $('#amount').val($(this).attr('data-Amount'));
+                $('#jazzcashnumber').modal('show');
+            });
+        })
+        $(document).ready(function()
+        {
+
+            $(document).on('click', ".easypaisa", function () {
+                debugger;
+                $('#orderid').val($(this).attr('data-OrderId'));
+                $('#amount').val($(this).attr('data-Amount'));
+                $('#easypaisanumber').modal('show');
+            });
+        })
+        
+        
+        
+    $(".clickitem").click(function () {
+        debugger;
+        $(".clickitem").attr('href', 'https://portal.webdoc.com.pk/transection/A/cc.php?orderid=' + @ViewBag.OrderId + "&amount=" + @ViewBag.Amount);
+       
+
+    })
+    </script>
+
+<div class="modal  fade in" id="jazzcashnumber" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-blue">
+                <h4 class="modal-title ">Jazzcash Payment</h4>
+            </div>
+            <div style="display:flex;justify-content:center;align-items:center">
+                <img src="https://i.imgur.com/KUJoe.gif" style="display:none" id="images" />
+            </div>
+           @using (Html.BeginForm("JazzCashPaymentApi", "Patient", FormMethod.Post,new { id = "theForm" }))
+           {
+            <div class="modal-body text-center">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <label class="col-md-4 offset-md-1 text-left">Phone Number</label>
+                        <div>
+                            <input type="text" class="col-md-5 form-control" name="PhoneNo"/>
+                        </div>
+                    </div>
+                </div><br />
+                <div class="row ">
+                    <div class="col-md-12">
+                        <label class="col-md-4 offset-md-1 text-left">CNIC</label>
+                        <div>
+                            <input type="text" class="col-md-5 form-control" name="CNIC"/>
+                        </div>
+                    </div>
+                </div><br />
+                
+            </div>
+            <div class="modal-footer">
+             
+                @Html.Hidden("orderid")
+                @Html.Hidden("amount")
+
+               
+                <br />
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="OnClientClose()">Close</button>
+                    <button type="submit"  class="btn btn-primary " id="formSubmit" >Submit</button>
+                
+
+          
+    </div>
+           }
+</div>
+</div>
+</div>
+<div class="modal  fade in" id="easypaisanumber" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-blue">
+                <h4 class="modal-title ">Easypaisa Payment</h4>
+            </div>
+            <div style="display:flex;justify-content:center;align-items:center">
+                <img src="https://i.imgur.com/KUJoe.gif" style="display:none" id="image" />
+            </div>
+            @using (Html.BeginForm("EasyPaisaPaymentApi", "Patient", FormMethod.Post, new { id = "theForm1" }))
+            {
+                <div class="modal-body text-center">
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <label class="col-md-4 offset-md-1 text-left">Phone Number</label>
+                            <div>
+                                <input type="text" class="col-md-5 form-control" name="PhoneNo" />
+                            </div>
+                        </div>
+                    </div><br />
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <label class="col-md-4 offset-md-1 text-left">Email</label>
+                            <div>
+                                <input type="text" class="col-md-5 form-control" name="Email" />
+                            </div>
+                        </div>
+                    </div><br />
+
+                </div>
+                <div class="modal-footer">
+
+                    @Html.Hidden("orderid")
+                    @Html.Hidden("amount")
+
+
+                    <br />
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="OnClientClose()">Close</button>
+                    <button type="submit" class="btn btn-primary" id="formSubmit1">Submit</button>
+
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    var theSubmitButton = document.getElementById('formSubmit');
+
+    theSubmitButton.onclick = function() {
+        var theFormItself =
+            document.getElementById('theForm');
+        theFormItself.style.display = 'none';
+        var theForm =
+            document.getElementById('images');
+        theForm.style.display = 'block';
+        var theSuccessMessage =
+            document.getElementById('successMessage');
+        theSuccessMessage.style.display = 'block';
+    }
+</script>
+<script type="text/javascript">
+    var theSubmitButton = document.getElementById('formSubmit1');
+
+    theSubmitButton.onclick = function() {
+        var theFormItself =
+            document.getElementById('theForm1');
+        theFormItself.style.display = 'none';
+        var theForm =
+            document.getElementById('image');
+        theForm.style.display = 'block';
+        var theSuccessMessage =
+            document.getElementById('successMessage');
+        theSuccessMessage.style.display = 'block';
+    }
+</script>

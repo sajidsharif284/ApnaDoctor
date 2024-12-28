@@ -1,0 +1,40 @@
+﻿@model ApnaDoctor.Models.PatientPreviousDisease
+
+@{
+    ViewBag.Title = "EditPatientDisease";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+}
+<h4 class="mt-4 ml-4">Edit PatientDisease</h4>
+<div class="ml-4">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.Hidden("Id", (string)ViewBag.id)
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.PatientProfileId, "PatientProfileId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("PatientProfileId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PatientProfileId, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiseaseId, "DiseaseId", htmlAttributes: new { @class = "control-label col-md-2" })<br /><br />
+                <div class="col-md-10">
+                    @Html.DropDownList("DiseaseId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DiseaseId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

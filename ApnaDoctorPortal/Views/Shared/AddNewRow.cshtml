@@ -1,0 +1,62 @@
+﻿
+
+<div>
+    <div class="row">
+        <div class="form-group">
+
+
+            <label>Medicine Name</label>
+            @Html.DropDownList("MedicineNames",
+new SelectList(ViewBag.MedicineName, "Id", "MedicineName"), "Select", new { @class = "form-control chosen-select", PlaceHolder = "Select" })
+        </div>
+
+        <div class="form-group pl-2">
+            <label class="">No of Days</label>
+            @Html.TextBox("Days", null, new { @class = "form-control ", PlaceHolder = "1" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>In Morning</label>
+                @Html.TextBox("Morning", null, new { @class = "form-control", PlaceHolder = "1" })
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>In AfterNoon</label>
+                @Html.TextBox("AfterNoon", null, new { @class = "form-control", PlaceHolder = "0" })
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>In Night</label>
+                @Html.TextBox("Night", null, new { @class = "form-control", PlaceHolder = "1" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Category</label>
+        @Html.DropDownList("Category", new List<SelectListItem>()
+                        {
+                             new SelectListItem {Text = "Tablet", Value = "Tablet"},
+                             new SelectListItem {Text = "Gel/Cream", Value = "Gel/Cream"},
+                               new SelectListItem {Text = "Syrup", Value = "Syrup"},
+                               new SelectListItem {Text = "Drops", Value = "Drops"},
+                               new SelectListItem {Text = "Spray", Value = "Spray"},
+                               new SelectListItem {Text = "Capsule", Value = "Capsule"}
+
+                        }, "- Select Category - ", new { @class = "form-control" })
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>Additional Instructions</label>
+                @Html.TextArea("AdditionalNotes", null, 5, 6, new { @class = "form-control", PlaceHolder = "Instruction About medicine" })
+            </div>
+        </div>
+    </div>
+</div>
+

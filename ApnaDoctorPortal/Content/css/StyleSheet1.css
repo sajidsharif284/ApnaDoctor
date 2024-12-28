@@ -1,0 +1,186 @@
+﻿html, body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    background:white;
+}
+.breadcome-list {
+    padding: 20px;
+    background: #8c9fc2;
+    margin: 30px 0px;
+}
+.header-top-area {
+    position: fixed;
+    background:#659dcf ;
+    z-index: 99;
+    left: 200px;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    transition: all 0.3s;
+}
+.sidebar-nav .metismenu {
+    background: #659dcf;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.menuitem{
+   margin-left:20px;
+}
+
+nav ul li a:hover{
+    display:block;
+    background-color:green;
+    color:white;
+    border-radius:8px;
+}
+.breadcome-heading .form-control, .breadcome-heading .form-control:focus {
+    border: 1px solid #152036;
+    font-size: 13px;
+    height: 34px;
+    color: #303030;
+    padding-left: 20px;
+    padding-right: 40px;
+    background: #eef0f3;
+    box-shadow: none;
+    border-radius: 30px;
+    width: 200px;
+    transition: all .4s ease 0s;
+}
+
+
+.headregisterpatient{
+    margin-top:30px;
+}
+.btnregister{
+    margin-top:15px;
+    margin-left:-150px;
+    background-color:lavender;
+    color:black;
+}
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left;
+   
+}
+.col-md-10{
+    
+    float:left;
+    width:400px;
+   
+}
+.form-control {
+    padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color:white;
+  color:black;
+  width:400px;
+  height:45px;
+  text-align:left;
+}
+hr{
+    width:35%;
+}
+.editbutton{
+    display:block;
+    width:80px;
+    height:40px;
+    background-color:#57789c;
+    color:white;
+    line-height:40px;
+    text-align:center;
+     border-radius:8px;
+     font-size:17px;
+}
+dt,dd{
+    padding-top:5px;
+}
+.dl-horizontal dt {
+    float: left;
+    width: 200px;
+    overflow: hidden;
+    clear: left;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.editbutton:hover{
+    color:orange;
+}
+.createnewbutton{
+    display:block;
+    width:120px;
+    height:40px;
+    background-color:#57789c;
+    color:white;
+    line-height:40px;
+    text-align:center;
+    border-radius:8px;
+    margin-top:25px;
+    margin-left:-30px;
+}
+.createnewbutton:hover{
+    color:orange;
+}
+.createnewbutton2{
+    display:block;
+    width:150px;
+    height:40px;
+    background-color:#57789c;
+    color:white;
+    line-height:40px;
+    text-align:center;
+    border-radius:8px;
+    margin-top:25px;
+    margin-left:20px;
+}
+.createnewbutton2:hover{
+    color:orange;
+}
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width:98%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color:#57789c;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #57789c;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #57789c;
+}
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}

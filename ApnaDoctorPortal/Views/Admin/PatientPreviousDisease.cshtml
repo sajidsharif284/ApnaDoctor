@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ApnaDoctor.Models.PatientPreviousDisease>
+
+@{
+    ViewBag.Title = "PatientPreviousDisease";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div class="row ml-3">
+    <h4 class="col-md-5 mt-4">Patient PreviousDisease</h4>
+</div>
+
+<table class="table-bordered table-striped table-hover styled-table ml-4" style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Disease.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientProfile.FirstName)
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Disease.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientProfile.FirstName)
+                </td>
+            </tr>
+        </tbody>
+    }

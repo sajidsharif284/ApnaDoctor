@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ApnaDoctor.Models.PatientPreviousDisease>
+
+@{
+    ViewBag.Title = "ListPreviousDisease";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css" />
+}
+<div class="row ml-3">
+        <h4 class="mt-4">Patient Disease</h4>
+    <a href="@Url.Action("CreatePatientPreviousDisease","Patient")" class="btn d-block text-white ml-3 mt-4" style="background-color:#57789c" >Add Disease</a>
+</div>
+<table class="table table-bordered table-striped table-hover styled-table ml-3 " style="width:95%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientProfile.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disease.Name)
+            </th>
+
+            <th>Detail</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientProfile.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disease.Name)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "EditPatientDisease", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeletePatientDisease", new { id = item.Id })
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>

@@ -1,0 +1,209 @@
+﻿@model ApnaDoctor.Models.PatientProfile
+
+@{
+    ViewBag.Title = "DetailPatientProfile";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+   
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>
+}
+
+<div class="row pt-5 pb-3">
+    <div class="col-md-5">
+        <div class="card text-center ml-5">
+            <div class="card-header">
+                <h5 class="card-title mt-auto mb-auto">Patient Profile</h5>
+            </div>
+            <div class="card-body ">
+
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateOfBirth):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DateOfBirth)
+                    </dd>
+                    <hr class="line" />
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Country):
+                    </dt>
+
+                    <dd style="">
+                        @Html.DisplayFor(model => model.Country)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CNIC):
+                    </dt>
+
+                    <dd style="">
+                        @Html.DisplayFor(model => model.CNIC)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.City):
+                    </dt>
+
+                    <dd style="">
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PatientCompany):
+                    </dt>
+
+                    <dd style="">
+                        @Html.DisplayFor(model => model.PatientCompany)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MartialStatus):
+                    </dt>
+
+                    <dd style="">
+                        @Html.DisplayFor(model => model.MartialStatus)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Age):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Age)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Gender):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Gender)
+                    </dd>
+                    <hr class="line" />
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Weight):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Weight)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Height):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Height)
+                    </dd>
+                    <hr class="line" />
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RegistrationDate):
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RegistrationDate)
+                    </dd>
+                    <hr class="line" />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address):
+                    </dt>
+
+                    <dd style="text-align:center;width:204px;float:right;margin-top:-25px">
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+                    <div class="clear"></div>
+                    <hr class="line" />
+                    <a href="@Url.Action("EditPatientProfile","Patient",new { id=Model.ApplicationUserId,date=Model.DateOfBirth})" class="btn btn-primary d-block">Edit</a>
+                    <br />
+                </dl>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6 ml-3">
+        <div class="card text-center">
+            <div class="card-header">
+                <h5 class="card-title mt-auto mb-auto">Patient Disease</h5>
+            </div>
+            <div class="card-body">
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Disease</th>
+
+                        </tr>
+                    </thead>
+                    @foreach (var item1 in @ViewBag.disease)
+                {
+                <tbody>
+                    <tr>
+                        <td>@item1.PatientProfile.FirstName</td>
+                        <td>@item1.Disease.Name</td>
+
+                    </tr>
+                </tbody>
+                }
+                </table>
+
+
+
+            </div>
+
+        </div>
+     </div>
+</div>
+
+<style>
+    .line{
+        width:100%;
+    }
+    .clear{
+        clear:both;
+    }
+    .card {
+        box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+</style>
+@*<style type="text/css">
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+    .line {
+        width: 100%;
+    }
+</style>*@

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ApnaDoctor.Models.FamilyMember>
+
+@{
+    ViewBag.Title = "ListFamilyMember";
+    Layout = "~/Views/Shared/LayoutPatient.cshtml";
+}
+
+<div class="row ml-3">
+    <h4 class="mt-4">Family Member</h4>
+    <a href="@Url.Action("AddFamilyMember","Patient")" class="btn d-block text-white ml-3 mt-4" style="background-color:#57789c">Add Member</a>
+</div>
+<table class="table table-bordered table-striped table-hover styled-table ml-3" style="width:95%">
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.PatientProfile.FirstName)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Relation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Detail</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.PatientProfile.FirstName)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Relation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditFamilyMember", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteFamilyMember", new { id = item.Id })
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>

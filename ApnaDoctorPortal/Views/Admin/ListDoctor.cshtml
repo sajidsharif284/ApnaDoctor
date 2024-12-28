@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ApnaDoctor.Models.DoctorProfile>
+
+@{
+    ViewBag.Title = "ListDoctor";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="row ml-2">
+    <h4 class="mt-4">Doctor Profiles</h4>
+</div>
+
+<table class="table table-bordered table-striped table-hover styled-table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNIC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            
+            <th>Detail</th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNIC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditDoctorProfile", new { id = item.ApplicationUserId }) |
+               @Html.ActionLink("Schedule", "CheckDoctorSchedule", new { id = item.ApplicationUserId }) |
+                @Html.ActionLink("Details", "DetailDoctorProfile", new { id = item.ApplicationUserId })
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>

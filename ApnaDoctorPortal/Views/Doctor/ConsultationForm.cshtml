@@ -1,0 +1,377 @@
+﻿
+@using System.Web.Configuration
+@using Microsoft.Ajax.Utilities
+@model ApnaDoctor.Models.NewConsultationViewModel
+
+@{
+    ViewBag.Title = "ConsultationForm";
+    Layout = "~/Views/Shared/LayoutDoctor.cshtml";
+    <link rel="stylesheet" href="~/Content/css/StyleSheet1.css"/>
+}
+
+<h2>Patient Consultation</h2>
+<hr style="width: 1px; color: #cc0000; width: 100%; border: 1px solid #cc0000;">
+@using (Html.BeginForm("SaveConsultation", "Doctor", new { patientId = Model.PatientId, slotid = ViewBag.SlotId }, FormMethod.Post, new { @class = "m-t", role = "form" }))
+{
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#cc0000;text-align:center; color:white">
+                    <h3 class="modal-title" id="exampleModalLabel">Add Medicine</h3>
+                </div>
+
+
+
+
+                <div class="modal-body">
+                    @Html.ActionLink("Add New Medicine", "AddMedicine", "Doctor", new { @class = "btn btn-primary", target = "_blank" })
+                    <br />
+                    <br />
+                    @Html.Partial("AddNewRow")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>=
+                    <button type="button" id="btnAdd" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    //add history
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+
+            @if (ViewBag.History != null)
+            {
+                <div class="row pt-5 pb-3 ml-3" >
+                <div class="card col-md-5 text-center">
+
+                    <div class="card-body">
+                        <div class="card-header">
+                            <h5 class="card-title">Patient History</h5>
+                        </div>
+
+                        <dl class="dl-horizontal">
+
+                            <dt>
+                                Past Medical history:
+                            </dt>
+
+                            <dd>
+                                @ViewBag.History.PastMedicalhistory
+                            </dd>
+                            <hr class="line" />
+
+                            <dt>
+                                Past Surgical history:
+                            </dt>
+
+                            <dd>
+                                @ViewBag.History.PastSurgicalhistory
+                            </dd>
+                            <hr class="line" />
+
+                            <dt>
+                                Drug history:
+                            </dt>
+
+                            <dd>
+                                @ViewBag.History.Drughistory
+                            </dd>
+                            <hr class="line" />
+                            <dt>
+                                Gyne/OBS history:
+                            </dt>
+
+                            <dd>
+                                @ViewBag.History.GyneorOBShistory
+                            </dd>
+                            <hr class="line" />
+                            <a href="@Url.Action("Edithistory","Doctor",new { patientId = @Model.PatientId,id = ViewBag.History.Id})" class="btn btn-primary d-block">Edit History</a>
+
+                        </dl>
+
+
+                    </div>
+
+                </div>
+         </div>
+            }
+            else
+            {
+                <div class="ibox-title col-md-12">
+                    <h3 class="">
+                        Patient History
+                    </h3>
+                </div>
+                <div class="ibox-content col-md-12" id="description">
+                    <div class="col-md-3 ">
+                        @Html.ActionLink("Add History", "Addhistory", "Doctor", new { patientId = @Model.PatientId, mobileNumber = ViewBag.Mobilenumber, network = ViewBag.network }, new { @class = "btn btn-primary" })
+
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+
+
+    //add history end
+    <br />
+
+    <button type="button" style="margin-top:2%;margin-left:1%" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add Medicine
+    </button><br />
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Prescribe Medicine</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table id="MedcineTable" class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Medicine Id</th>
+                                    <th>Medicine Name</th>
+                                    <th>No of days</th>
+                                    <th>Morning</th>
+                                    <th>AfterNoon</th>
+                                    <th>Night</th>
+                                    <th>Additional Notes</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xs-12 col-md-6 col-lg-4">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+
+
+
+        <div class="form-group">
+            <label>Patient's Complaint</label>
+            @Html.TextBoxFor(m => m.Consultation.Complaint, new { @class = "form-control", PlaceHolder = "E.g. Headache, Fever" })
+        </div>
+
+        <div class="form-group">
+            <label>Diagnosis</label>
+            @Html.TextBoxFor(m => m.Consultation.Diagnosis, new { @class = "form-control", PlaceHolder = "E.g. Dehydration" })
+        </div>
+
+        <div class="form-group">
+            <label>Tests</label>
+            @Html.DropDownList("Test1",
+           new SelectList(Model.TestNames, "Id", "Name"), "Select", new { @class = "form-control chosen-select", PlaceHolder = "Select" })
+        </div>
+
+        <div class="form-group">
+            <label>Remarks</label>
+            @Html.TextBoxFor(m => m.Consultation.Remarks, new { @class = "form-control", PlaceHolder = "E.g. Consult an Orthopedic Surgeon" })
+        </div>
+
+        <div class="form-group">
+            <label>CallType</label>
+            @Html.TextBoxFor(m => m.Consultation.CallType, new { @class = "form-control", PlaceHolder = "E.g. Disease/Information" })
+        </div>
+        <div class="form-group">
+            <label>Relation</label>
+            @Html.TextBoxFor(m => m.Consultation.Relation, new { @class = "form-control", PlaceHolder = "E.g. Brother/Sister" })
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary block full-width m-b" value="SAVE" />
+        </div>
+    </div>
+        
+
+}
+    <script type="text/javascript">
+
+                function buttonValue(e) {
+                    alert(e.value);
+                    if (e.value === 'true') {
+                        alert('it is true');
+                    }
+                    else {
+                        alert('it is false');
+                    }
+                }
+
+
+
+                function RemoveRow(btn) {
+                    var row = btn.parentNode.parentNode;
+                    row.parentNode.removeChild(row);
+                }
+
+                $(document).ready(function () {
+                    // $('.dataTables-example').DataTable();
+
+                    $("#btnAdd").click(function () {
+                        // $('#MedcineTable').DataTable().destroy();
+                        debugger;
+                        var days = $('#Days').val();
+                        var medicineName = $('#MedicineNames option:selected').text();
+                        var medicinevalue = $('#MedicineNames option:selected').val();
+                        var morning = $('#Morning').val();
+                        var afternoon = $('#AfterNoon').val();
+                        var night = $('#Night').val();
+                        var addtionalnotes = $('#AdditionalNotes').val();
+
+                        var newRowContent = "<tr>" +
+                            "<td><input  type='hidden' class='form-control' name='medicinevalue[]' value='" + medicinevalue + "'>" + medicinevalue + "</td>" +
+                            "<td><input  type='hidden' class='form-control' name='medicineName[]' value='" + medicineName + "'>" + medicineName + "</td>" +
+                            "<td><input  type='hidden' class='form-control' name='days[]' value='" + days + "'>" + days + "</td>" +
+                            "<td><input  type='hidden' class='form-control' name='morning[]' value='" + morning + "'>" + morning + "</td>" +
+                            "<td><input  type='hidden' class='form-control' name='afternoon[]' value='" + afternoon + "'>" + afternoon + "</td>" +
+                            "<td><input  type='hidden' class='form-control' name='night[]' value='" + night + "'>" + night + "</td>" +
+                            "<td><input  type='hidden' class='form-control' name='addtionalnotes[]' value='" + addtionalnotes + "'>" + addtionalnotes + "</td>" +
+                            "<td><input  type='button' class='btn btn-danger' name='btnRemove[]' onclick='RemoveRow(this)' value='Remove'></td>" +
+                            "</tr>";
+
+                        $("#MedcineTable tbody").append(newRowContent);
+
+                        //  $('#MedcineTable').DataTable().draw();
+                        $('#MedicineNames').val('');
+                        $('#Days').val('');
+                        $('#Morning').val('');
+                        $('#AfterNoon').val('');
+                        $('#Night').val('');
+                        $('#AdditionalNotes').val('');
+                        $('#MedicineNames').val('').trigger('chosen:updated');
+                        $("#btnAdd").attr("data-dismiss", "modal");
+                    });
+
+                });
+                $(function () {
+                    $("[name='Category']").change(function () {
+
+                        var noofdays = $("#Days").val();
+                        var morning = $("#Morning").val();
+                        var afternoon = $("#AfterNoon").val();
+                        var night = $("#Night").val();
+
+                        var message = " ";
+                        if ($(this).val() == "Tablet") {
+                            if (morning != "" && morning != "0") {
+                                message += morning + " Goli Subha ";
+                            }
+                            if (afternoon != "" && afternoon != "0") {
+                                message += afternoon + " Goli Dopher ";
+                            }
+                            if (night != "" && night != "0") {
+                                message += night + " Goli Shaam ";
+                            }
+                            message += noofdays + " din tak.";
+                        }
+                        else if ($(this).val() == "Spray") {
+                            if (morning != "" && morning != "0") {
+                                message += morning + " Spray Subha ";
+                            }
+                            if (afternoon != "" && afternoon != "0") {
+                                message += afternoon + " Spray Dopher ";
+                            }
+                            if (night != "" && night != "0") {
+                                message += night + " Spray Shaam ";
+                            }
+                            message += noofdays + " din tak.";
+                        }
+                        else if ($(this).val() == "Capsule") {
+                            if (morning != "" && morning != "0") {
+                                message += morning + " Capsule Subha ";
+                            }
+                            if (afternoon != "" && afternoon != "0") {
+                                message += afternoon + " Capsule Dopher ";
+                            }
+                            if (night != "" && night != "0") {
+                                message += night + " Capsule Shaam ";
+                            }
+                            message += noofdays + " din tak.";
+                        }
+                        else if ($(this).val() == "Gel/Cream") {
+                            if (morning != "" && morning != "0") {
+                                message += morning + " bar Subha ";
+                            }
+                            if (afternoon != "" && afternoon != "0") {
+                                message += afternoon + " bar Dopher ";
+                            }
+                            if (night != "" && night != "0") {
+                                message += night + " bar Shaam ";
+                            }
+
+                            message += noofdays + " din tak mutasira hisey per lagaey.";
+                        }
+                        else if ($(this).val() == "Syrup") {
+                            if (morning != "" && morning != "0") {
+                                message += morning + " khaney ka chamach Subha ";
+                            }
+                            if (afternoon != "" && afternoon != "0") {
+                                message += afternoon + " khaney ka chamach Dopher ";
+                            }
+                            if (night != "" && night != "0") {
+                                message += night + " khaney ka chamach Shaam ";
+                            }
+
+                            message += noofdays + " din tak peeye.";
+                        }
+                        else if ($(this).val() == "Drops") {
+                            if (morning != "" && morning != "0") {
+                                message += morning + " drops Subha ";
+                            }
+                            if (afternoon != "" && afternoon != "0") {
+                                message += afternoon + " drops Dopher ";
+                            }
+                            if (night != "" && night != "0") {
+                                message += night + " drops Shaam ";
+                            }
+
+                            message += noofdays + " din tak daley.";
+                        }
+                        $("#AdditionalNotes").val(message);
+                    });
+                });
+               
+
+    </script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
+
+<style>
+    .line {
+        width: 100%;
+    }
+
+    .dl-horizontal dt {
+        float:left;
+    }
+
+    .card {
+        box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+</style>
